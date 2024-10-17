@@ -1,1 +1,1 @@
-# paquete-estructuras
+# Paquete. Estructuras de datos
