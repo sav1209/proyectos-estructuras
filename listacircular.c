@@ -253,9 +253,21 @@ void eliminarDespuesDeNodoLC(NodoLC** inicio, int info) {
     free(aEliminar);
 }
 
-
 // Borra todos los nodos de una lista circular.
+void borraLC(NodoLC** inicio) {
+    if (*inicio == NULL) {
+        return;
+    }
 
+    NodoLC *aEliminar;
+    while ((*inicio)->liga != *inicio) {
+        aEliminar = (*inicio)->liga;
+        (*inicio)->liga = aEliminar->liga;
+        free(aEliminar);
+    }
+    free(*inicio);
+    *inicio = NULL;
+}
 
 // MENU
 void menuListasCirculares() {
@@ -330,6 +342,7 @@ void menuListasCirculares() {
                 printf("Opcion invalida, vuelva a intentar.\n");
         }
     } while (opcion != 9 || confirmacion == 'n');
+    borraLC(&listaCircular);
 }
 
 
