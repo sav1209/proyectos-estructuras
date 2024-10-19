@@ -4,78 +4,95 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct NodoLC {
+typedef struct NodoPila {
     int info;
-    struct NodoLC *liga;
-} NodoLC;
+    struct NodoPila *liga;
+} NodoPila;
 
 // Crea un nuevo nodo con liga nula.
-NodoLC *crearNodoLC(int info) {
-    NodoLC *nuevoNodo = (NodoLC *)malloc(sizeof(NodoLC));
+NodoPila *crearNodoPila(int info) {
+    NodoPila *nuevoNodo = (NodoPila *)malloc(sizeof(NodoPila));
     nuevoNodo->info = info;
     nuevoNodo->liga = NULL;
     return nuevoNodo;
 }
 
 // 1. ALGORITMO QUE REALICE LA OPERACIÓN PUSH (INSERTAR POR EL FINAL)
-void push(NodoLC **pila, int info) {
-    if (*pila == NULL) {
-        *pila = crearNodoLC(info);
-        (*pila)->liga = *pila;
+void push(NodoPila **final, int info) {
+    if (*final == NULL) {
+        *final = crearNodoPila(info);
+        (*final)->liga = *final;
         return;
     }
 
-    NodoLC *nuevoNodo = crearNodoLC(info);
-    nuevoNodo->liga = (*pila)->liga;
-    (*pila)->liga = nuevoNodo;
-    *pila = (*pila)->liga;
+    NodoPila *nuevoNodo = crearNodoPila(info);
+    nuevoNodo->liga = (*final)->liga;
+    (*final)->liga = nuevoNodo;
+    *final = (*final)->liga;
 }
 
 // 2. ALGORITMO QUE REALICE LA OPERACIÓN POP (ELIMINAR POR EL FINAL)
-void pop(NodoLC **inicio) {
-    if (*inicio == NULL) {
+void pop(NodoPila **final) {
+    if (*final == NULL) {
         printf("La lista está vacía.\n");
         return;
     }
 
-    NodoLC *temp = *inicio;
+    NodoPila *temp = *final;
 
-    if (temp->liga == *inicio) {
+    if (temp->liga == *final) {
         free(temp);
-        *inicio = NULL;
+        *final = NULL;
         printf("Se ha eliminado el único elemento de la lista.\n");
         return;
     }
 
-    while (temp->liga != *inicio) {
+    while (temp->liga != *final) {
         temp = temp->liga;
     }
 
-    temp->liga = (*inicio)->liga;
-    free(*inicio);
-    *inicio = temp;
+    temp->liga = (*final)->liga;
+    free(*final);
+    *final = temp;
 
-    printf("Elemento eliminado del final de la lista.\n");
+    printf("Elemento eliminado del final de la pila.\n");
 }
 
 // 3. ALGORITMO QUE IMPRIMA LOS ELEMENTOS DE LA PILA
-void imprimirPila(NodoLC *pila) {
-    if (pila == NULL) {
+void imprimirPila(NodoPila *final) {
+    if (final == NULL) {
         printf("La lista esta vacia.\n");
     } else {
-        NodoLC *temp = pila->liga;
+        NodoPila *temp = final->liga;
         do {
             printf("-> %d\n", temp->info);
             temp = temp->liga;
-        } while (temp != pila->liga);
+        } while (temp != final->liga);
     }
+}
+
+// Borra todos los nodos de una pila.
+void borrarPila(NodoPila **final) {
+    if (*final == NULL) {
+        return;
+    }
+    
+    NodoPila *aEliminar;
+    while ((*final)->liga != *final) {
+        aEliminar = (*final)->liga;
+        (*final)->liga = aEliminar->liga;
+        free(aEliminar);
+    }
+
+    free(*final);
+    *final = NULL;
 }
 
 // MENU
 void menuListasCirculares() {
     char confirmacion = 'n';
     int opcion, info;
-    NodoLC *pila = NULL;
+    NodoPila *pila = NULL;
 
     puts("======================");
     puts("===== MENU PILAS =====");
@@ -116,6 +133,8 @@ void menuListasCirculares() {
             printf("Opcion invalida, vuelva a intentar.\n");
         }
     } while (opcion != 4 || confirmacion == 'n');
+    borrarPila(&pila);
+    imprimirPila(pila);
 }
 
 int main() {
