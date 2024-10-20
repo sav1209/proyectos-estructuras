@@ -1,9 +1,9 @@
-// Se implementara la pila manejando la cola de una lista circular.
-
+// Se implementara la pila con una lista circular y manipulando el último nodo de la misma.
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+// Estructura para cada nodo de la pila.
 typedef struct NodoPila {
     int info;
     struct NodoPila *liga;
@@ -19,12 +19,14 @@ NodoPila *crearNodoPila(int info) {
 
 // 1. ALGORITMO QUE REALICE LA OPERACIÓN PUSH (INSERTAR POR EL FINAL)
 void push(NodoPila **final, int info) {
+    // Si el último nodo apunta a NULL, no existe una pila, por lo tanto el nodo a agregar será el primero.
     if (*final == NULL) {
         *final = crearNodoPila(info);
         (*final)->liga = *final;
         return;
     }
 
+    // Si ya hay nodos en la pila, la liga del último nodo ('final') debe apuntar al nuevo nodo y se cambia nuevo nodo ahora debe ser el último.
     NodoPila *nuevoNodo = crearNodoPila(info);
     nuevoNodo->liga = (*final)->liga;
     (*final)->liga = nuevoNodo;
@@ -34,23 +36,24 @@ void push(NodoPila **final, int info) {
 // 2. ALGORITMO QUE REALICE LA OPERACIÓN POP (ELIMINAR POR EL FINAL)
 void pop(NodoPila **final) {
     if (*final == NULL) {
-        printf("La lista está vacía.\n");
+        printf("La pila está vacía.\n");
+        return;
+    }
+
+    if ((*final)->liga == *final) {
+        free(*final);
+        *final = NULL;
+        printf("Se ha eliminado el único elemento de la pila.\n");
         return;
     }
 
     NodoPila *temp = *final;
-
-    if (temp->liga == *final) {
-        free(temp);
-        *final = NULL;
-        printf("Se ha eliminado el único elemento de la lista.\n");
-        return;
-    }
-
+    // Se itera hasta el penúltimo nodo de la pila.
     while (temp->liga != *final) {
         temp = temp->liga;
     }
 
+    // Se elimina el último nodo y el penúltimo pasa a ser el último.
     temp->liga = (*final)->liga;
     free(*final);
     *final = temp;
@@ -63,6 +66,7 @@ void imprimirPila(NodoPila *final) {
     if (final == NULL) {
         printf("La lista esta vacia.\n");
     } else {
+        // Se apunta utiliza un puntero auxiliar al primer nodo de la pila y se imprime cada nodo hasta que el puntero auxilar vuelva a ser el primero.
         NodoPila *temp = final->liga;
         do {
             printf("-> %d\n", temp->info);
@@ -73,17 +77,19 @@ void imprimirPila(NodoPila *final) {
 
 // Borra todos los nodos de una pila.
 void borrarPila(NodoPila **final) {
+    // Si no hay pila, no hay nada que borrar.
     if (*final == NULL) {
         return;
     }
     
+    // Borra el primer nodo de la pila hasta que solo quede el nodo final.
     NodoPila *aEliminar;
     while ((*final)->liga != *final) {
         aEliminar = (*final)->liga;
         (*final)->liga = aEliminar->liga;
         free(aEliminar);
     }
-
+    // Se borra también el primer nodo y se indica que la pila esta vacía.
     free(*final);
     *final = NULL;
 }
@@ -134,7 +140,6 @@ void menuListasCirculares() {
         }
     } while (opcion != 4 || confirmacion == 'n');
     borrarPila(&pila);
-    imprimirPila(pila);
 }
 
 int main() {
