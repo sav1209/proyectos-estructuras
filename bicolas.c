@@ -17,7 +17,20 @@ NodoBicola *crearNodoBicola(int info) {
 }
 
 // REALIZA LA OPERACIÓN PUSH INSERTANDO POR EL FRENTE
-// push_front(NodoBicola **final)
+void push_front(NodoBicola **final, int info){
+    NodoBicola *nuevoNodo = crearNodoBicola(info);
+    
+    if (*final == NULL) {
+        *final = nuevoNodo;
+        (*final)->liga = *final; 
+        return;
+    }
+
+    nuevoNodo->liga = (*final)->liga; 
+    (*final)->liga = nuevoNodo;      
+
+    printf("Elemento %d agregado al frente de la bicola.\n", info);
+}
 
 // REALIZA LA OPERACIÓN PUSH INSERTANDO POR EL FINAL
 void push_back(NodoBicola **final, int info) {
@@ -36,7 +49,25 @@ void push_back(NodoBicola **final, int info) {
 }
 
 // REALIZA LA OPERACIÓN POP ELIMINANDO POR EL FRENTE
-// pop_front(NodoBicola **final)
+void pop_front(NodoBicola **final){
+    if (*final == NULL) {
+        printf("La bicola está vacía.\n");
+        return;
+    }
+
+    if ((*final)->liga == *final) {
+        free(*final);
+        *final = NULL;
+        printf("Se ha eliminado el único elemento de la bicola.\n");
+        return;
+    }
+
+    NodoBicola *primero = (*final)->liga;  
+    (*final)->liga = primero->liga;       
+    free(primero);                         
+
+    printf("El primer elemento se ha eliminado.\n");
+}
 
 // REALIZA LA OPERACIÓN POP ELIMINANDO POR EL FINAL
 void pop_back(NodoBicola **final) {
@@ -174,7 +205,7 @@ void menuBicolaSalidaRestringida() {
         case 1:
             printf("Ingrese el dato que desea agregar a la bicola por el frente: ");
             scanf("%d", &info);
-            // push_front(&bicola, info);
+            push_front(&bicola, info);
             break;
         case 2:
             printf("Ingrese el dato que desea agregar a la bicola por el final: ");
