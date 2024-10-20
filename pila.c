@@ -144,7 +144,7 @@ void menuPilas() {
 
 int main() {
 
-    menuListasCirculares();
+    menuPilas();
 
     return 0;
 }
