@@ -95,7 +95,7 @@ void borrarPila(NodoPila **final) {
 }
 
 // MENU
-void menuListasCirculares() {
+void menuPilas() {
     char confirmacion = 'n';
     int opcion, info;
     NodoPila *pila = NULL;
