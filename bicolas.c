@@ -120,7 +120,7 @@ void menuBicolaEntradaRestringida() {
 
         switch (opcion) {
         case 1:
-            printf("Ingrese el dato que desea agregar a la pila: ");
+            printf("Ingrese el dato que desea agregar a la bicola por el final: ");
             scanf("%d", &info);
             push_back(&bicola, info);
             break;
@@ -172,12 +172,12 @@ void menuBicolaSalidaRestringida() {
 
         switch (opcion) {
         case 1:
-            printf("Ingrese el dato que desea agregar a la pila: ");
+            printf("Ingrese el dato que desea agregar a la bicola por el frente: ");
             scanf("%d", &info);
             // push_front(&bicola, info);
             break;
         case 2:
-            printf("Ingrese el dato que desea agregar a la pila: ");
+            printf("Ingrese el dato que desea agregar a la bicola por el final: ");
             scanf("%d", &info);
             push_back(&bicola, info);
             break;
