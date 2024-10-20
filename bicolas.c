@@ -156,7 +156,7 @@ void menuBicolaEntradaRestringida() {
             push_back(&bicola, info);
             break;
         case 2:
-            // pop_front(&bicola);
+            pop_front(&bicola);
             break;
         case 3:
             pop_back(&bicola);
