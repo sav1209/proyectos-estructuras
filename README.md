@@ -1,6 +1,6 @@
 # PROYECTOS - MAC - ESTRUCTURAS DE DATOS
 
-## PAQUETE DE ESTRUCTURAS DE DATOS
+## PAQUETE DE ALGORITMOS (ESTRUCTURAS DE DATOS)
 
 1. **LISTAS:**
     - LISTAS SIMPLES
@@ -18,3 +18,5 @@
     - BICOLES: https://sea.acatlan.unam.mx/mod/assign/view.php?id=581894
     - COLAS CON PRIORIDAD: https://sea.acatlan.unam.mx/mod/assign/view.php?id=581897
 5. **ÁRBOLES:** https://sea.acatlan.unam.mx/mod/assign/view.php?id=581901
+
+## EVALUADOR DE FUNCIONES ALGEBRAICAS
