@@ -17,7 +17,9 @@
     - COLAS SIMPLES: https://sea.acatlan.unam.mx/mod/assign/view.php?id=581892
     - BICOLES: https://sea.acatlan.unam.mx/mod/assign/view.php?id=581894
     - COLAS CON PRIORIDAD: https://sea.acatlan.unam.mx/mod/assign/view.php?id=581897
-5. **ÁRBOLES:** https://sea.acatlan.unam.mx/mod/assign/view.php?id=581901
+5. **ÁRBOLES:** 
+    - ÁRBOLES BINARIOS: https://sea.acatlan.unam.mx/mod/assign/view.php?id=581901
+    - ÁRBOLES BINARIOS DE BÚSQUEDA: https://sea.acatlan.unam.mx/mod/assign/view.php?id=581902
 
 ## EVALUADOR DE EXPRESIONES ALGEBRAICAS
 
