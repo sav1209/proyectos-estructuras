@@ -8,7 +8,7 @@ typedef struct NodoArbol {
     struct NodoArbol* ligaDer;
 } NodoArbol;
 
-// Crea un nuevo nodo con liga nula.
+// Crea un nuevo nodo con ligas nulas.
 NodoArbol* crearNodoArbol(int info) {
     NodoArbol* nuevoNodo = (NodoArbol*) malloc(sizeof(NodoArbol));
     if (nuevoNodo == NULL) {
@@ -30,7 +30,7 @@ void Carga(NodoArbol* elemento) {
     scanf("%d", &info);
     elemento->info = info;
 
-    printf("¿El nodo tiene hijo izquierdo (s/n)? ");
+    printf("¿El nodo con %d tiene hijo izquierdo (s/n)? ", info);
     scanf(" %c", &resp);
     if (resp == 's' || resp == 'S') {
         NodoArbol* otro = crearNodoArbol(0);
@@ -38,7 +38,7 @@ void Carga(NodoArbol* elemento) {
         Carga(otro);
     }
 
-    printf("¿El nodo tiene hijo derecho (s/n)? ");
+    printf("¿El nodo con %d tiene hijo derecho (s/n)? ", info);
     scanf(" %c", &resp);
     if (resp == 's' || resp == 'S') {
         NodoArbol* otro = crearNodoArbol(0);
@@ -74,6 +74,21 @@ void posorden(NodoArbol* elemento) {
     }
 }
 
+// Borra todos los nodos de un arbol binario.
+void BorrarArbol(NodoArbol** raiz) {
+    // No hay nada que borrar
+    if (*raiz == NULL) {
+        return;
+    }
+
+    BorrarArbol(&(*raiz)->ligaIzq);
+    (*raiz)->ligaIzq = NULL;
+    BorrarArbol(&(*raiz)->ligaDer);
+    (*raiz)->ligaDer = NULL;
+    free(*raiz);
+    *raiz = NULL;
+}
+
 // Menú para trabajar con el árbol binario.
 void menuArbolBinario() {
     char confirmacion = 'n';
@@ -81,12 +96,12 @@ void menuArbolBinario() {
     NodoArbol* raiz = NULL;
 
     puts("========================");
-    puts("== MENU Arbol Binario ==");
+    puts("== MENU ARBOL BINARIO ==");
     puts("========================\n");
-    puts("1. LECTURA EN PREORDEN");
-    puts("2. LECTURA EN INORDEN");
-    puts("3. LECTURA EN POSORDEN");
-    puts("4. CARGAR ELEMENTOS EN EL ARBOL");
+    puts("1. CARGAR ELEMENTOS EN EL ARBOL");
+    puts("2. IMPRESION EN PREORDEN");
+    puts("3. IMPRESION EN INORDEN");
+    puts("4. IMPRESION EN POSORDEN");
     puts("5. REGRESAR AL MENU PRINCIPAL");
 
     do {
@@ -96,27 +111,31 @@ void menuArbolBinario() {
         switch (opcion) {
             case 1:
                 if (raiz == NULL) {
+                    raiz = crearNodoArbol(0);
+                }
+                Carga(raiz);
+                break;
+            case 2:
+                if (raiz == NULL) {
                     printf("No hay elementos en el arbol\n");
                 } else {
                     preorden(raiz);
                 }
                 break;
-
-            case 2:
-                printf("Función inorden aún no implementada.\n");
-                break;
-
             case 3:
-                printf("Función posorden aún no implementada.\n");
+                if (raiz == NULL) {
+                    printf("No hay elementos en el arbol\n");
+                } else {
+                    inorden(raiz);
+                }
                 break;
-
             case 4:
                 if (raiz == NULL) {
-                    raiz = crearNodoArbol(0);
+                    printf("No hay elementos en el arbol\n");
+                } else {
+                    posorden(raiz);
                 }
-                Carga(raiz);
                 break;
-
             case 5:
                 do {
                     printf("¿Está seguro de regresar al menú principal (s/n)? ");
@@ -132,6 +151,7 @@ void menuArbolBinario() {
                 printf("Opcion invalida, vuelva a intentar.\n");
         }
     } while (opcion != 5 || confirmacion == 'n');
+    BorrarArbol(&raiz);
 }
 
 int main() {
