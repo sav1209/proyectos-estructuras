@@ -10,7 +10,7 @@ typedef struct NodoABB {
     struct NodoABB* ligaDer;
 } NodoABB;
 
-// Crea un nuevo nodo con liga nula.
+// Crea un nuevo nodo con ligas nulas.
 NodoABB* crearNodoABB(int info) {
     NodoABB* nuevoNodo = (NodoABB*) malloc(sizeof(NodoABB));
     nuevoNodo->info = info;
@@ -69,6 +69,30 @@ void ImprimirPosorden(NodoABB* elemento) {
 
 
 // ALGORITMO QUE BUSQUE UN ELEMENTO EN UN ABB
+void BuscarEnABB(NodoABB *elemento, int info) {
+    if(elemento != NULL) {
+        if(info == elemento->info) {
+            printf("Se encontro al elemento");
+            return;
+        }
+
+        if(info < elemento->info) {
+            if(elemento->ligaIzq == NULL) {
+                printf("No se encontro el elemento.\n");
+            } else {
+                BuscarEnABB(elemento->ligaIzq, info);
+            }
+            return;
+        }
+
+        if(elemento->ligaDer == NULL) {
+            printf("No se encontro el elemento.\n");
+        } else {
+            BuscarEnABB(elemento->ligaDer, info);
+        }
+        return;
+    }
+}
 
 
 // ALGORITMO QUE ELIMINE UN ELEMENTO EN UN ABB
@@ -116,7 +140,13 @@ void menuABB() {
                 InsertarEnABB(&raiz, info);
                 break;
             case 2:
-                // Por implementar
+                printf("Ingrese el elemento que desea buscar: ");
+                scanf("%d", &info);
+                if (raiz == NULL) {
+                    printf("No hay elementos en el arbol.\n");
+                } else {
+                    BuscarEnABB(raiz, info);
+                }
                 break;
             case 3:
                 // Por implementar
