@@ -40,15 +40,6 @@ void InsertarEnABB(NodoABB** elemento, int info) {
     }
 }
 
-// ALGORITMO QUE IMPRIME LOS ELEMENTOS DEL ÁRBOL MEDIANTE UN RECORRIDO EN PREORDEN
-void ImprimirPreorden(NodoABB* elemento) {
-    if (elemento != NULL) {
-        printf("%d\n", elemento->info);
-        ImprimirPreorden(elemento->ligaIzq);
-        ImprimirPreorden(elemento->ligaDer);
-    }
-}
-
 // ALGORITMO QUE IMPRIME LOS ELEMENTOS DEL ÁRBOL MEDIANTE UN RECORRIDO EN INORDEN
 void ImprimirInorden(NodoABB* elemento) {
     if (elemento != NULL) {
@@ -57,16 +48,6 @@ void ImprimirInorden(NodoABB* elemento) {
         ImprimirInorden(elemento->ligaDer);
     }
 }
-
-//ALGORITMO QUE IMPRIME LOS ELEMENTOS DEL ÁRBOL MEDIANTE UN RECORRIDO EN POSORDEN
-void ImprimirPosorden(NodoABB* elemento) {
-    if (elemento != NULL) {
-        ImprimirPosorden(elemento->ligaIzq);
-        ImprimirPosorden(elemento->ligaDer);
-        printf("%d\n", elemento->info);
-    }
-}
-
 
 // ALGORITMO QUE BUSQUE UN ELEMENTO EN UN ABB
 void BuscarEnABB(NodoABB *elemento, int info) {
@@ -82,20 +63,87 @@ void BuscarEnABB(NodoABB *elemento, int info) {
             } else {
                 BuscarEnABB(elemento->ligaIzq, info);
             }
-            return;
-        }
-
-        if(elemento->ligaDer == NULL) {
-            printf("No se encontro el elemento.\n");
         } else {
-            BuscarEnABB(elemento->ligaDer, info);
+            if(elemento->ligaDer == NULL) {
+                printf("No se encontro el elemento.\n");
+            } else {
+                BuscarEnABB(elemento->ligaDer, info);
+            }
         }
         return;
     }
 }
 
+// RETORNA LA DIRECCIÓN DEL PADRE DEL NODO MÁS A LA IZQUIERDA
+NodoABB* ExtremoIzquierdo(NodoABB* elemento, NodoABB* padre) {
+    if(elemento->ligaIzq == NULL) {
+        return padre;
+    }
+    else {
+        return ExtremoIzquierdo(elemento->ligaIzq, elemento);
+    }
+}
+
 
 // ALGORITMO QUE ELIMINE UN ELEMENTO EN UN ABB
+void BorrarNodoABB(NodoABB** elemento, int info, NodoABB* padre) {
+    if((*elemento) != NULL) {
+        if(info == (*elemento)->info) {
+            NodoABB *porEliminar = *elemento;
+            // EL ELEMENTO A BORRAR ES UNA HOJA, SIMPLEMENTE SE SUPRIME
+            if((porEliminar->ligaIzq == NULL) && (porEliminar->ligaDer == NULL)) {
+                if(padre->ligaIzq == porEliminar) {
+                    padre->ligaIzq = NULL;
+                } else {
+                    padre->ligaDer = NULL;
+                }
+                free(porEliminar);
+                return;
+            }
+
+            // EL ELEMENTO A BORRAR TIENE UN SOLO DESCENDIENTE, ENTONCES SUSTITUIRSE POR ESE DESCENDIENTE
+            if(((porEliminar->ligaIzq == NULL) && (porEliminar->ligaDer != NULL)) || ((porEliminar->ligaIzq != NULL) && (porEliminar->ligaDer == NULL))) {
+                NodoABB *hijo = (porEliminar->ligaIzq != NULL) ? (porEliminar->ligaIzq) : (porEliminar->ligaDer);
+                if(padre->ligaIzq == porEliminar) {
+                    padre->ligaIzq = hijo;
+                } else {
+                    padre->ligaDer = hijo;
+                }
+                free(porEliminar);
+                return;
+            }
+
+            // EL ELEMENTO A BORRAR TIENE DOS DESCENDIENTES
+            NodoABB* padreExtIzq = ExtremoIzquierdo(porEliminar->ligaDer, NULL);
+            if(padreExtIzq != NULL) {
+                NodoABB* subarbolDer = padreExtIzq->ligaIzq->ligaDer;
+                porEliminar->info = padreExtIzq->ligaIzq->info;
+                free(padreExtIzq->ligaIzq);
+                padreExtIzq->ligaIzq = subarbolDer;
+                return;
+            } else {
+                NodoABB* subarbolDer = porEliminar->ligaDer->ligaDer;
+                porEliminar->info = porEliminar->ligaDer->info;
+                free(porEliminar->ligaDer);
+                porEliminar->ligaDer = subarbolDer;
+                return;
+            }
+        }
+
+        if(info < (*elemento)->info) {
+            if((*elemento)->ligaIzq != NULL) {
+                BorrarNodoABB(&(*elemento)->ligaIzq, info, *elemento);
+            }
+        } else {
+            if((*elemento)->ligaDer != NULL) {
+                BorrarNodoABB(&(*elemento)->ligaDer, info, *elemento);
+            }
+        }
+
+        return;
+    }
+}
+
 
 
 // Borra todos los nodos de un arbol binario.
@@ -117,19 +165,17 @@ void menuABB() {
     char confirmacion = 'n';
     int opcion, info;
     NodoABB* raiz = NULL;
-
-    puts("==========================================");
-    puts("===== MENU ÁRBOL BINARIO DE BÚSQUEDA =====");
-    puts("==========================================\n");
-    puts("1. INSERTAR UN ELEMENTO EN EL ABB.");
-    puts("2. BUSCA UN ELEMENTO EN EL ABB");
-    puts("3. ELIMINA UN ELEMENTO DEL ABB");
-    puts("4. IMPRESION EN PREORDEN");
-    puts("5. IMPRESION EN INORDEN");
-    puts("6. IMPRESION EN POSORDEN");
-    puts("7. REGRESAR AL MENU PRINCIPAL");
-
+    
     do {
+        puts("==========================================");
+        puts("===== MENU ÁRBOL BINARIO DE BÚSQUEDA =====");
+        puts("==========================================\n");
+        puts("1. INSERTAR UN ELEMENTO EN EL ABB.");
+        puts("2. BUSCA UN ELEMENTO EN EL ABB");
+        puts("3. ELIMINA UN ELEMENTO DEL ABB");
+        puts("4. IMPRESION (EN INORDEN)");
+        puts("5. REGRESAR AL MENU PRINCIPAL");
+
         printf("\nOpcion: ");
         scanf("%d", &opcion);
 
@@ -140,39 +186,31 @@ void menuABB() {
                 InsertarEnABB(&raiz, info);
                 break;
             case 2:
-                printf("Ingrese el elemento que desea buscar: ");
-                scanf("%d", &info);
                 if (raiz == NULL) {
                     printf("No hay elementos en el arbol.\n");
                 } else {
+                    printf("Ingrese el elemento que desea buscar: ");
+                    scanf("%d", &info);
                     BuscarEnABB(raiz, info);
                 }
                 break;
             case 3:
-                // Por implementar
-                break;
-            case 4:
                 if (raiz == NULL) {
                     printf("No hay elementos en el arbol\n");
                 } else {
-                    ImprimirPreorden(raiz);
+                    printf("Ingrese la informacion del elemento a eliminar: ");
+                    scanf("%d", &info);
+                    BorrarNodoABB(&raiz, info, NULL);
                 }
                 break;
-            case 5:
+            case 4:
                 if (raiz == NULL) {
                     printf("No hay elementos en el arbol\n");
                 } else {
                     ImprimirInorden(raiz);
                 }
                 break;
-            case 6:
-                if (raiz == NULL) {
-                    printf("No hay elementos en el arbol\n");
-                } else {
-                    ImprimirPosorden(raiz);
-                }
-                break;
-            case 7:
+            case 5:
                 do {
                     printf("¿Está seguro de regresar al menú principal (s/n)? ");
                     scanf(" %c", &confirmacion);
@@ -186,7 +224,7 @@ void menuABB() {
             default:
                 printf("Opcion invalida, vuelva a intentar.\n");
         }
-    } while (opcion != 7 || confirmacion == 'n');
+    } while (opcion != 5 || confirmacion == 'n');
     BorrarABB(&raiz);
 }
 
