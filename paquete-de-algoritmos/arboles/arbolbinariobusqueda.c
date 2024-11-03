@@ -74,76 +74,45 @@ void BuscarEnABB(NodoABB *elemento, int info) {
     }
 }
 
-// RETORNA LA DIRECCIÓN DEL PADRE DEL NODO MÁS A LA IZQUIERDA
-NodoABB* ExtremoIzquierdo(NodoABB* elemento, NodoABB* padre) {
-    if(elemento->ligaIzq == NULL) {
-        return padre;
+
+// RETORNA EL NODO MÁS A LA IZQUIERDA
+NodoABB* ExtremoIzquierdo(NodoABB* elemento) {
+    if(elemento == NULL) return NULL;
+    while(elemento->ligaIzq != NULL) {
+        elemento = elemento->ligaIzq;
     }
-    else {
-        return ExtremoIzquierdo(elemento->ligaIzq, elemento);
-    }
+    return elemento;
 }
 
+// ALGORITMO QUE ELIMINA UN ELEMENTO EN UN ABB
+void BorrarNodoABB(NodoABB** elemento, int info) {
+    if (*elemento == NULL) return;
 
-// ALGORITMO QUE ELIMINE UN ELEMENTO EN UN ABB
-void BorrarNodoABB(NodoABB** elemento, int info, NodoABB* padre) {
-    if((*elemento) != NULL) {
-        if(info == (*elemento)->info) {
-            NodoABB *porEliminar = *elemento;
-            // EL ELEMENTO A BORRAR ES UNA HOJA, SIMPLEMENTE SE SUPRIME
-            if((porEliminar->ligaIzq == NULL) && (porEliminar->ligaDer == NULL)) {
-                if(padre->ligaIzq == porEliminar) {
-                    padre->ligaIzq = NULL;
-                } else {
-                    padre->ligaDer = NULL;
-                }
-                free(porEliminar);
-                return;
-            }
+    if (info < (*elemento)->info) {
+        BorrarNodoABB(&(*elemento)->ligaIzq, info);
+    } else if (info > (*elemento)->info) {
+        BorrarNodoABB(&(*elemento)->ligaDer, info);
+    } else {
+        NodoABB* porEliminar = *elemento;
 
-            // EL ELEMENTO A BORRAR TIENE UN SOLO DESCENDIENTE, ENTONCES SUSTITUIRSE POR ESE DESCENDIENTE
-            if(((porEliminar->ligaIzq == NULL) && (porEliminar->ligaDer != NULL)) || ((porEliminar->ligaIzq != NULL) && (porEliminar->ligaDer == NULL))) {
-                NodoABB *hijo = (porEliminar->ligaIzq != NULL) ? (porEliminar->ligaIzq) : (porEliminar->ligaDer);
-                if(padre->ligaIzq == porEliminar) {
-                    padre->ligaIzq = hijo;
-                } else {
-                    padre->ligaDer = hijo;
-                }
-                free(porEliminar);
-                return;
-            }
-
-            // EL ELEMENTO A BORRAR TIENE DOS DESCENDIENTES
-            NodoABB* padreExtIzq = ExtremoIzquierdo(porEliminar->ligaDer, NULL);
-            if(padreExtIzq != NULL) {
-                NodoABB* subarbolDer = padreExtIzq->ligaIzq->ligaDer;
-                porEliminar->info = padreExtIzq->ligaIzq->info;
-                free(padreExtIzq->ligaIzq);
-                padreExtIzq->ligaIzq = subarbolDer;
-                return;
-            } else {
-                NodoABB* subarbolDer = porEliminar->ligaDer->ligaDer;
-                porEliminar->info = porEliminar->ligaDer->info;
-                free(porEliminar->ligaDer);
-                porEliminar->ligaDer = subarbolDer;
-                return;
-            }
+        // Caso 1: El nodo es una hoja
+        if (porEliminar->ligaIzq == NULL && porEliminar->ligaDer == NULL) {
+            *elemento = NULL;
+            free(porEliminar);
         }
-
-        if(info < (*elemento)->info) {
-            if((*elemento)->ligaIzq != NULL) {
-                BorrarNodoABB(&(*elemento)->ligaIzq, info, *elemento);
-            }
-        } else {
-            if((*elemento)->ligaDer != NULL) {
-                BorrarNodoABB(&(*elemento)->ligaDer, info, *elemento);
-            }
+        // Caso 2: El nodo tiene un único hijo
+        else if (porEliminar->ligaIzq == NULL || porEliminar->ligaDer == NULL) {
+            *elemento = (porEliminar->ligaIzq != NULL) ? porEliminar->ligaIzq : porEliminar->ligaDer;
+            free(porEliminar);
         }
-
-        return;
+        // Caso 3: El nodo tiene dos hijos
+        else {
+            NodoABB* sucesor = ExtremoIzquierdo(porEliminar->ligaDer);
+            porEliminar->info = sucesor->info;
+            BorrarNodoABB(&porEliminar->ligaDer, sucesor->info);
+        }
     }
 }
-
 
 
 // Borra todos los nodos de un arbol binario.
@@ -200,7 +169,10 @@ void menuABB() {
                 } else {
                     printf("Ingrese la informacion del elemento a eliminar: ");
                     scanf("%d", &info);
-                    BorrarNodoABB(&raiz, info, NULL);
+                    NodoABB* raizTemp = crearNodoABB(info+1);
+                    raizTemp->ligaIzq = raiz;
+                    BorrarNodoABB(&raizTemp, info);
+                    free(raizTemp);
                 }
                 break;
             case 4:
