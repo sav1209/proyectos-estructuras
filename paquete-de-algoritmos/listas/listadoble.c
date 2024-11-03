@@ -321,6 +321,7 @@ void menu_listas_dobles() {
     lista_doble->final=NULL;
 
     do {
+        system("cls");
         puts("==========================================");
         puts("===== MENU LISTAS DOBLEMENTE LIGADAS =====");
         puts("==========================================\n");
@@ -381,6 +382,8 @@ void menu_listas_dobles() {
                 puts("Opcion invalida.");
                 break;
         }
+        putchar('\n');
+        system("pause");
     } while (opcion != 9 || confirmacion == 'n');
     borrarLD(&lista_doble);
 }
