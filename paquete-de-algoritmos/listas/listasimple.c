@@ -324,6 +324,7 @@ void menuListasSimples() {
     NodoLS* listaSimple = NULL;
 
     do {
+        system("cls");
         printf("===============================\n");
         printf("===== MENU LISTAS SIMPLES =====\n");
         printf("===============================\n\n");
@@ -420,6 +421,8 @@ void menuListasSimples() {
             default:
                 printf("Opcion invalida, vuelva a intentar.\n");
         }
+        putchar('\n');
+        system("pause");
     } while (opcion != 14 || confirmacion == 'n');
     borrarLS(&listaSimple);
 }
