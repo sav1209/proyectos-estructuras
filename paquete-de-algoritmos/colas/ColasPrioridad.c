@@ -18,15 +18,20 @@ NodoCola *crearNodoCola(int info, int prioridad) {
     return nuevoNodo;
 }
 
-// PUSH POR EL FINAL 
-void push(NodoCola **final, int info, int prioridad) {
-    NodoCola *nuevoNodo = crearNodoCola(info, prioridad);
-    if (*final == NULL) {
-        *final = nuevoNodo;
+
+void push(NodoCola **inicio, int info, int prioridad) {
+    if(prioridad < 1 || prioridad > 5) {
+        printf("Prioridad invalida, debe estar en [1,5]. No se agregara el elemento\n");
         return;
     }
 
-    NodoCola *actual = *final;
+    NodoCola *nuevoNodo = crearNodoCola(info, prioridad);
+    if (*inicio == NULL) {
+        *inicio = nuevoNodo;
+        return;
+    }
+
+    NodoCola *actual = *inicio;
     NodoCola *anterior = NULL;
     while (actual != NULL && actual->prioridad <= prioridad) {
         anterior = actual;
@@ -34,8 +39,8 @@ void push(NodoCola **final, int info, int prioridad) {
     }
 
     if (anterior == NULL) {
-        nuevoNodo->liga = *final;
-        *final = nuevoNodo;
+        nuevoNodo->liga = *inicio;
+        *inicio = nuevoNodo;
     } else {
         anterior->liga = nuevoNodo;
         nuevoNodo->liga = actual;
@@ -43,40 +48,41 @@ void push(NodoCola **final, int info, int prioridad) {
     printf("Elemento %d con prioridad %d agregado.\n", info, prioridad);
 }
 
-// POP POR O EL INICIO
-void pop(NodoCola **final) {
-    if (*final == NULL) {
+
+void pop(NodoCola **inicio) {
+    if (*inicio == NULL) {
         printf("La cola está vacía.\n");
         return;
     }
-    NodoCola *temp = *final;
-    *final = (*final)->liga;
-    printf("Elemento %d eliminado.\n", temp->info);
+    NodoCola *temp = *inicio;
+    *inicio = (*inicio)->liga;
+    printf("Elemento %d con prioridad %d eliminado.\n", temp->info, temp->prioridad);
     free(temp);
 }
 
+
 // IMPRIME LA COLA CON LA PRIORIDAD QUE TIENE CADA NODO
-void imprimirCola(NodoCola *final) {
-    if (final == NULL) {
+void imprimirCola(NodoCola *inicio) {
+    if (inicio == NULL) {
         printf("La cola está vacía.\n");
         return;
     }
     printf("Contenido de la cola con prioridad:\n");
-    NodoCola *actual = final;
+    NodoCola *actual = inicio;
     while (actual != NULL) {
-        printf("Elemento: %d, Prioridad: %d\n", actual->info, actual->prioridad);
+        printf("-> Elemento: %d, Prioridad: %d\n", actual->info, actual->prioridad);
         actual = actual->liga;
     }
 }
 
+
 // BORRA TODOS LOS NODOS DE LA COLA CON PRIORIDAD
-void borrarCola(NodoCola **final) {
-    while (*final != NULL) {
-        NodoCola *temp = *final;
-        *final = (*final)->liga;
+void borrarCola(NodoCola **inicio) {
+    while (*inicio != NULL) {
+        NodoCola *temp = *inicio;
+        *inicio = (*inicio)->liga;
         free(temp);
     }
-    printf("Memoria liberada.\n");
 }
 
 // MENU DE LA COLA CON PRIORIDAD
@@ -85,15 +91,15 @@ void menuColaPrioridad() {
     int opcion, info, prioridad;
     NodoCola *cola = NULL;
 
-    puts("===========================");
-    puts("===== COLA CON PRIORIDAD =====");
-    puts("===========================\n");
-    puts("1. PUSH (AGREGAR ELEMENTO)");
-    puts("2. POP (ELIMINAR ELEMENTO)");
-    puts("3. IMPRIMIR ELEMENTOS");
-    puts("4. SALIR");
-
     do {
+        puts("==============================");
+        puts("===== COLA CON PRIORIDAD =====");
+        puts("==============================\n");
+        puts("1. PUSH (AGREGAR ELEMENTO)");
+        puts("2. POP (ELIMINAR ELEMENTO)");
+        puts("3. IMPRIMIR ELEMENTOS");
+        puts("4. REGRESAR AL MENU PRINCIPAL");
+
         printf("\nOpcion: ");
         scanf("%d", &opcion);
 
