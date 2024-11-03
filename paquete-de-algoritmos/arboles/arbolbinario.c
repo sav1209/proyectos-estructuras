@@ -95,16 +95,16 @@ void menuArbolBinario() {
     int opcion;
     NodoArbol* raiz = NULL;
 
-    puts("========================");
-    puts("== MENU ARBOL BINARIO ==");
-    puts("========================\n");
-    puts("1. CARGAR ELEMENTOS EN EL ARBOL");
-    puts("2. IMPRESION EN PREORDEN");
-    puts("3. IMPRESION EN INORDEN");
-    puts("4. IMPRESION EN POSORDEN");
-    puts("5. REGRESAR AL MENU PRINCIPAL");
-
     do {
+        puts("==========================");
+        puts("=== MENU ARBOL BINARIO ===");
+        puts("==========================\n");
+        puts("1. CARGAR ELEMENTOS EN EL ARBOL");
+        puts("2. IMPRESION EN PREORDEN");
+        puts("3. IMPRESION EN INORDEN");
+        puts("4. IMPRESION EN POSORDEN");
+        puts("5. REGRESAR AL MENU PRINCIPAL");
+
         printf("\nOpcion: ");
         scanf("%d", &opcion);
 
