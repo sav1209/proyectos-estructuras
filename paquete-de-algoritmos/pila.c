@@ -23,14 +23,14 @@ void push(NodoPila **final, int info) {
     if (*final == NULL) {
         *final = crearNodoPila(info);
         (*final)->liga = *final;
-        return;
+    } else {
+        // Si ya hay nodos en la pila, la liga del último nodo ('final') debe apuntar al nuevo nodo y se cambia nuevo nodo ahora debe ser el último.
+        NodoPila *nuevoNodo = crearNodoPila(info);
+        nuevoNodo->liga = (*final)->liga;
+        (*final)->liga = nuevoNodo;
+        *final = (*final)->liga;
     }
-
-    // Si ya hay nodos en la pila, la liga del último nodo ('final') debe apuntar al nuevo nodo y se cambia nuevo nodo ahora debe ser el último.
-    NodoPila *nuevoNodo = crearNodoPila(info);
-    nuevoNodo->liga = (*final)->liga;
-    (*final)->liga = nuevoNodo;
-    *final = (*final)->liga;
+    printf("El elemento se ha insertado al final de la pila.\n");
 }
 
 // 2. ALGORITMO QUE REALICE LA OPERACIÓN POP (ELIMINAR POR EL FINAL)
@@ -100,15 +100,15 @@ void menuPilas() {
     int opcion, info;
     NodoPila *pila = NULL;
 
-    puts("======================");
-    puts("===== MENU PILAS =====");
-    puts("======================\n");
-    puts("1. PUSH (INSERTAR POR EL FINAL)");
-    puts("2. POP (ELIMINAR POR EL FINAL)");
-    puts("3. IMPRIME LOS ELEMENTOS DE LA PILA");
-    puts("4. REGRESAR AL MENU PRINCIPAL");
-
     do {
+        puts("======================");
+        puts("===== MENU PILAS =====");
+        puts("======================\n");
+        puts("1. PUSH (INSERTAR POR EL FINAL)");
+        puts("2. POP (ELIMINAR POR EL FINAL)");
+        puts("3. IMPRIME LOS ELEMENTOS DE LA PILA");
+        puts("4. REGRESAR AL MENU PRINCIPAL");
+
         printf("\nOpcion: ");
         scanf("%d", &opcion);
 
