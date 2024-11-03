@@ -22,14 +22,13 @@ void push_front(NodoBicola **final, int info){
     
     if (*final == NULL) {
         *final = nuevoNodo;
-        (*final)->liga = *final; 
-        return;
+        (*final)->liga = *final;
+    } else {
+        nuevoNodo->liga = (*final)->liga;
+        (*final)->liga = nuevoNodo;
     }
 
-    nuevoNodo->liga = (*final)->liga; 
-    (*final)->liga = nuevoNodo;      
-
-    printf("Elemento %d agregado al frente de la bicola.\n", info);
+    printf("Elemento %d insertado por frente de la bicola.\n", info);
 }
 
 // REALIZA LA OPERACIÓN PUSH INSERTANDO POR EL FINAL
@@ -38,14 +37,15 @@ void push_back(NodoBicola **final, int info) {
     if (*final == NULL) {
         *final = crearNodoBicola(info);
         (*final)->liga = *final;
-        return;
+    } else {
+        // Si ya hay nodos en la bicola, la liga del último nodo ('final') debe apuntar al nuevo nodo y se cambia nuevo nodo ahora debe ser el último.
+        NodoBicola *nuevoNodo = crearNodoBicola(info);
+        nuevoNodo->liga = (*final)->liga;
+        (*final)->liga = nuevoNodo;
+        *final = (*final)->liga;
     }
 
-    // Si ya hay nodos en la bicola, la liga del último nodo ('final') debe apuntar al nuevo nodo y se cambia nuevo nodo ahora debe ser el último.
-    NodoBicola *nuevoNodo = crearNodoBicola(info);
-    nuevoNodo->liga = (*final)->liga;
-    (*final)->liga = nuevoNodo;
-    *final = (*final)->liga;
+    printf("Elemento %d insertado por el final de la bicola.\n", info);
 }
 
 // REALIZA LA OPERACIÓN POP ELIMINANDO POR EL FRENTE
@@ -136,22 +136,22 @@ void menuBicolaEntradaRestringida() {
     int opcion, info;
     NodoBicola *bicola = NULL;
 
-    puts("===============================================");
-    puts("===== MENU BICOLAS DE ENTRADA RESTRINGIDA =====");
-    puts("===============================================\n");
-    puts("1. PUSH POR EL FINAL");
-    puts("2. POP POR EL FRENTE");
-    puts("3. POP POR EL FINAL");
-    puts("4. IMPRIME LOS ELEMENTOS DE LA BICOLA");
-    puts("5. REGRESAR AL MENU PRINCIPAL");
-
     do {
+        puts("===============================================");
+        puts("===== MENU BICOLAS DE ENTRADA RESTRINGIDA =====");
+        puts("===============================================\n");
+        puts("1. PUSH POR EL FINAL");
+        puts("2. POP POR EL FRENTE");
+        puts("3. POP POR EL FINAL");
+        puts("4. IMPRIME LOS ELEMENTOS DE LA BICOLA");
+        puts("5. REGRESAR AL MENU PRINCIPAL");
+
         printf("\nOpcion: ");
         scanf("%d", &opcion);
 
         switch (opcion) {
         case 1:
-            printf("Ingrese el dato que desea agregar a la bicola por el final: ");
+            printf("Ingrese el dato que desea insertar al final de la bicola: ");
             scanf("%d", &info);
             push_back(&bicola, info);
             break;
@@ -188,16 +188,16 @@ void menuBicolaSalidaRestringida() {
     int opcion, info;
     NodoBicola *bicola = NULL;
 
-    puts("===============================================");
-    puts("===== MENU BICOLAS DE SALIDA RESTRINGIDA  =====");
-    puts("===============================================\n");
-    puts("1. PUSH POR EL FRENTE");
-    puts("2. PUSH POR EL FINAL");
-    puts("3. POP POR EL FINAL");
-    puts("4. IMPRIME LOS ELEMENTOS DE LA BICOLA");
-    puts("5. REGRESAR AL MENU PRINCIPAL");
-
     do {
+        puts("===============================================");
+        puts("===== MENU BICOLAS DE SALIDA RESTRINGIDA  =====");
+        puts("===============================================\n");
+        puts("1. PUSH POR EL FRENTE");
+        puts("2. PUSH POR EL FINAL");
+        puts("3. POP POR EL FINAL");
+        puts("4. IMPRIME LOS ELEMENTOS DE LA BICOLA");
+        puts("5. REGRESAR AL MENU PRINCIPAL");
+
         printf("\nOpcion: ");
         scanf("%d", &opcion);
 
@@ -240,13 +240,13 @@ void menuBicolaSalidaRestringida() {
 void menuBicolas() {
     char opBicola;
 
-    puts("========================");
-    puts("===== MENU BICOLAS =====");
-    puts("========================\n");
-    puts("A) DE ENTRADA RESTRINGIDA");
-    puts("B) DE SALIDA RESTRINGIDA");
-
     do {
+        puts("========================");
+        puts("===== MENU BICOLAS =====");
+        puts("========================\n");
+        puts("A) DE ENTRADA RESTRINGIDA");
+        puts("B) DE SALIDA RESTRINGIDA");
+
         printf("\n¿Con que bicola desea trabajar (A/B)? ");
         scanf(" %c", &opBicola);
         opBicola = toupper(opBicola);
