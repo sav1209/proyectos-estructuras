@@ -79,7 +79,7 @@ void eliminarPrimerElementoLC(NodoLC** inicio) {
     if (temp->liga == *inicio) {
         free(*inicio);
         *inicio = NULL;
-        printf("El Unico elemento de la lista ha sido eliminado.\n");
+        printf("El unico elemento de la lista ha sido eliminado.\n");
         return;
     }
 
@@ -275,20 +275,20 @@ void menuListasCirculares() {
     int opcion, info, info2;
     NodoLC* listaCircular = NULL;
 
-    puts("==================================");
-    puts("===== MENU LISTAS CIRCULARES =====");
-    puts("==================================\n");
-    puts("1. CREA UNA LISTA CIRCULAR POR EL FINAL");
-    puts("2. IMPRIME EL CONTENIDO DE UNA LISTA CIRCULAR");
-    puts("3. ELIMINA EL PRIMER ELEMENTO DE UNA LISTA CIRCULAR");
-    puts("4. BUSCA UN ELEMENTO CON INFORMACIÓN DADA POR EL USUARIO EN UNA LISTA CIRCULAR Y QUE IMPRIMA LA DIRECCIÓN DEL ELEMENTO ANTECEDENTE Y LA INFORMACIÓN DEL ELEMENTO CONSECUENTE");
-    puts("5. INSERTA UN ELEMENTO ANTES DE UNO CON INFORMACIÓN DADA POR EL USUARIO EN UNA LISTA CIRCULAR");
-    puts("6. INSERTA UN ELEMENTO AL PRINCIPIO EN UNA LISTA CIRCULAR ");
-    puts("7. ELIMINA UN ELEMENTO AL FINAL DE UNA LISTA CIRCULAR");
-    puts("8. ELIMINA UN ELEMENTO DESPUÉS DE UNO CON INFORMACIÓN DADA POR EL USUARIO EN UNA LISTA CIRCULAR");
-    puts("9. REGRESAR AL MENU PRINCIPAL");
-
     do {
+        puts("==================================");
+        puts("===== MENU LISTAS CIRCULARES =====");
+        puts("==================================\n");
+        puts("1. CREA UNA LISTA CIRCULAR POR EL FINAL");
+        puts("2. IMPRIME EL CONTENIDO DE UNA LISTA CIRCULAR");
+        puts("3. ELIMINA EL PRIMER ELEMENTO DE UNA LISTA CIRCULAR");
+        puts("4. BUSCA UN ELEMENTO CON INFORMACIÓN DADA POR EL USUARIO EN UNA LISTA CIRCULAR Y QUE IMPRIMA LA DIRECCIÓN DEL ELEMENTO ANTECEDENTE Y LA INFORMACIÓN DEL ELEMENTO CONSECUENTE");
+        puts("5. INSERTA UN ELEMENTO ANTES DE UNO CON INFORMACIÓN DADA POR EL USUARIO EN UNA LISTA CIRCULAR");
+        puts("6. INSERTA UN ELEMENTO AL PRINCIPIO EN UNA LISTA CIRCULAR ");
+        puts("7. ELIMINA UN ELEMENTO AL FINAL DE UNA LISTA CIRCULAR");
+        puts("8. ELIMINA UN ELEMENTO DESPUÉS DE UNO CON INFORMACIÓN DADA POR EL USUARIO EN UNA LISTA CIRCULAR");
+        puts("9. REGRESAR AL MENU PRINCIPAL");
+
         printf("\nOpcion: ");
         scanf("%d", &opcion);
 
@@ -309,14 +309,14 @@ void menuListasCirculares() {
                 break;
                 break;
             case 5:
-                printf("¿Cual es la informacion del nodo que deseas buscar? ");
+                printf("¿Cual es la informacion del nodo del cual desea insertar antes? ");
                 scanf("%d", &info);
-                printf("Escribe la informacion del nodo que deseas agregar: \n");
+                printf("Escribe la informacion del nodo que deseas agregar: ");
                 scanf("%d", &info2);
                 insertarAntesDeNodoLC(&listaCircular,info,info2);
                 break;
             case 6:
-                printf("Escribe la informacion del nodo que deseas agregar: \n");
+                printf("Escribe la informacion del nodo que deseas agregar: ");
                 scanf("%d", &info);
                 InsertarPrincipio(&listaCircular,info);
                 break;
