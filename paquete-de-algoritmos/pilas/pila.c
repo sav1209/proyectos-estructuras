@@ -97,6 +97,8 @@ void menuPilas() {
     NodoPila *pila = NULL;
 
     do {
+        system("cls");
+
         puts("======================");
         puts("===== MENU PILAS =====");
         puts("======================\n");
@@ -134,6 +136,9 @@ void menuPilas() {
         default:
             printf("Opcion invalida, vuelva a intentar.\n");
         }
+
+        putchar('\n');
+        system("pause");
     } while (opcion != 4 || confirmacion == 'n');
     borrarPila(&pila);
 }

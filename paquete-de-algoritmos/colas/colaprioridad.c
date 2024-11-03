@@ -87,6 +87,8 @@ void menuColaPrioridad() {
     NodoColaPrio *cola = NULL;
 
     do {
+        system("cls");
+
         puts("==============================");
         puts("===== COLA CON PRIORIDAD =====");
         puts("==============================\n");
@@ -99,32 +101,35 @@ void menuColaPrioridad() {
         scanf("%d", &opcion);
 
         switch (opcion) {
-        case 1:
-            printf("Ingrese el valor del elemento: ");
-            scanf("%d", &info);
-            printf("Ingrese la prioridad del elemento: ");
-            scanf("%d", &prioridad);
-            pushColPrio(&cola, info, prioridad);
-            break;
-        case 2:
-            popColPrio(&cola);
-            break;
-        case 3:
-            imprimirColPrio(cola);
-            break;
-        case 4:
-            do {
-                printf("¿Está seguro de regresar al menu de colas (s/n)? ");
-                scanf(" %c", &confirmacion);
-                confirmacion = tolower(confirmacion);
-                if (confirmacion != 's' && confirmacion != 'n') {
-                    printf("Opción inválida, vuelva a ingresar.\n");
-                }
-            } while (confirmacion != 's' && confirmacion != 'n');
-            break;
-        default:
-            printf("Opción inválida, vuelva a intentar.\n");
+            case 1:
+                printf("Ingrese el valor del elemento: ");
+                scanf("%d", &info);
+                printf("Ingrese la prioridad del elemento: ");
+                scanf("%d", &prioridad);
+                pushColPrio(&cola, info, prioridad);
+                break;
+            case 2:
+                popColPrio(&cola);
+                break;
+            case 3:
+                imprimirColPrio(cola);
+                break;
+            case 4:
+                do {
+                    printf("¿Está seguro de regresar al menu de colas (s/n)? ");
+                    scanf(" %c", &confirmacion);
+                    confirmacion = tolower(confirmacion);
+                    if (confirmacion != 's' && confirmacion != 'n') {
+                        printf("Opción inválida, vuelva a ingresar.\n");
+                    }
+                } while (confirmacion != 's' && confirmacion != 'n');
+                break;
+            default:
+                printf("Opción inválida, vuelva a intentar.\n");
         }
+
+        putchar('\n');
+        system("pause");
     } while (opcion != 4 || confirmacion == 'n');
 
     borrarColPrio(&cola);

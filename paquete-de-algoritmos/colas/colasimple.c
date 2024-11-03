@@ -78,6 +78,8 @@ void menuCola() {
     NodoColaSim *final = NULL;
 
     do {
+        system("cls");
+
         puts("==============================");
         puts("===== MENU COLAS SIMPLES =====");
         puts("==============================\n");
@@ -90,30 +92,32 @@ void menuCola() {
         scanf("%d", &opcion);
 
         switch (opcion) {
-        case 1:
-            printf("Ingrese el dato que desea agregar a la cola: ");
-            scanf("%d", &info);
-            pushColSim(&frente, &final, info);
-            break;
-        case 2:
-            popColSim(&frente, &final);
-            break;
-        case 3:
-            imprimirColSim(frente);
-            break;
-        case 4:
-            do {
-                printf("¿Está seguro de regresar al menu de colas (s/n)? ");
-                scanf(" %c", &confirmacion);
-                confirmacion = tolower(confirmacion);
-                if (confirmacion != 's' && confirmacion != 'n') {
-                    printf("Opción inválida, vuelva a ingresar.\n");
-                }
-            } while (confirmacion != 's' && confirmacion != 'n');
-            break;
-        default:
-            printf("Opción inválida, vuelva a intentar.\n");
+            case 1:
+                printf("Ingrese el dato que desea agregar a la cola: ");
+                scanf("%d", &info);
+                pushColSim(&frente, &final, info);
+                break;
+            case 2:
+                popColSim(&frente, &final);
+                break;
+            case 3:
+                imprimirColSim(frente);
+                break;
+            case 4:
+                do {
+                    printf("¿Está seguro de regresar al menu de colas (s/n)? ");
+                    scanf(" %c", &confirmacion);
+                    confirmacion = tolower(confirmacion);
+                    if (confirmacion != 's' && confirmacion != 'n') {
+                        printf("Opción inválida, vuelva a ingresar.\n");
+                    }
+                } while (confirmacion != 's' && confirmacion != 'n');
+                break;
+            default:
+                printf("Opción inválida, vuelva a intentar.\n");
         }
+        putchar('\n');
+        system("pause");
     } while (opcion != 4 || confirmacion == 'n');
     borrarColSim(&frente, &final);
 }

@@ -321,6 +321,7 @@ void menuListasSimples() {
 
     do {
         system("cls");
+
         printf("===============================\n");
         printf("===== MENU LISTAS SIMPLES =====\n");
         printf("===============================\n\n");
@@ -418,6 +419,7 @@ void menuListasSimples() {
                 printf("Opcion invalida, vuelva a intentar.\n");
                 break;
         }
+        
         putchar('\n');
         system("pause");
     } while (opcion != 14 || confirmacion == 'n');

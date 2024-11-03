@@ -274,6 +274,7 @@ void menuListasCirculares() {
 
     do {
         system("cls");
+
         puts("==================================");
         puts("===== MENU LISTAS CIRCULARES =====");
         puts("==================================\n");
@@ -340,6 +341,7 @@ void menuListasCirculares() {
                 printf("Opcion invalida, vuelva a intentar.\n");
                 break;
         }
+        
         putchar('\n');
         system("pause");
     } while (opcion != 9 || confirmacion == 'n');

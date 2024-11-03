@@ -133,6 +133,8 @@ void menuBicolaEntradaRestringida() {
     NodoBicola *bicola = NULL;
 
     do {
+        system("cls");
+
         puts("===============================================");
         puts("===== MENU BICOLAS DE ENTRADA RESTRINGIDA =====");
         puts("===============================================\n");
@@ -174,6 +176,9 @@ void menuBicolaEntradaRestringida() {
         default:
             printf("Opcion invalida, vuelva a intentar.\n");
         }
+
+        putchar('\n');
+        system("pause");
     } while (opcion != 5 || confirmacion == 'n');
     borrarBicola(&bicola);
 }
@@ -185,6 +190,8 @@ void menuBicolaSalidaRestringida() {
     NodoBicola *bicola = NULL;
 
     do {
+        system("cls");
+
         puts("===============================================");
         puts("===== MENU BICOLAS DE SALIDA RESTRINGIDA  =====");
         puts("===============================================\n");
@@ -228,6 +235,9 @@ void menuBicolaSalidaRestringida() {
         default:
             printf("Opcion invalida, vuelva a intentar.\n");
         }
+
+        putchar('\n');
+        system("pause");
     } while (opcion != 5 || confirmacion == 'n');
     borrarBicola(&bicola);
 }
@@ -237,6 +247,8 @@ void menuBicolas() {
     char opBicola, confirmacion = 'n';
 
     do {
+        system("cls");
+
         puts("========================");
         puts("===== MENU BICOLAS =====");
         puts("========================\n");
@@ -249,24 +261,27 @@ void menuBicolas() {
         opBicola = toupper(opBicola);
 
         switch (opBicola) {
-        case 'A':
-            menuBicolaEntradaRestringida();
-            break;
-        case 'B':
-            menuBicolaSalidaRestringida();
-            break;
-        case 'C':
-            do {
-                printf("¿Está seguro de regresar al menu de colas (s/n)? ");
-                scanf(" %c", &confirmacion);
-                confirmacion = tolower(confirmacion);
-                if (confirmacion != 's' && confirmacion != 'n') {
-                    printf("Opción inválida, vuelva a ingresar.\n");
-                }
-            } while (confirmacion != 's' && confirmacion != 'n');
-            break;
-        default:
-            printf("Opcion invalida, vuelva a intentar.\n");
+            case 'A':
+                menuBicolaEntradaRestringida();
+                break;
+            case 'B':
+                menuBicolaSalidaRestringida();
+                break;
+            case 'C':
+                do {
+                    printf("¿Está seguro de regresar al menu de colas (s/n)? ");
+                    scanf(" %c", &confirmacion);
+                    confirmacion = tolower(confirmacion);
+                    if (confirmacion != 's' && confirmacion != 'n') {
+                        printf("Opción inválida, vuelva a ingresar.\n");
+                    }
+                } while (confirmacion != 's' && confirmacion != 'n');
+                break;
+            default:
+                printf("Opcion invalida, vuelva a intentar.\n");
         }
+
+        putchar('\n');
+        system("pause");
     } while (opBicola != 'C' || confirmacion == 'n');
 }

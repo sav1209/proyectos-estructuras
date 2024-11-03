@@ -310,6 +310,7 @@ void menu_listas_dobles() {
 
     do {
         system("cls");
+        
         puts("==========================================");
         puts("===== MENU LISTAS DOBLEMENTE LIGADAS =====");
         puts("==========================================\n");
@@ -370,6 +371,7 @@ void menu_listas_dobles() {
                 puts("Opcion invalida.");
                 break;
         }
+
         putchar('\n');
         system("pause");
     } while (opcion != 9 || confirmacion == 'n');
