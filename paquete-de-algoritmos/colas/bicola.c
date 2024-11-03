@@ -2,11 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Estructura para cada nodo de la bicola.
-typedef struct NodoBicola {
-    int info;
-    struct NodoBicola *liga;
-} NodoBicola;
+#include "bicola.h"
 
 // Crea un nuevo nodo con liga nula.
 NodoBicola *crearNodoBicola(int info) {
@@ -144,7 +140,7 @@ void menuBicolaEntradaRestringida() {
         puts("2. POP POR EL FRENTE");
         puts("3. POP POR EL FINAL");
         puts("4. IMPRIME LOS ELEMENTOS DE LA BICOLA");
-        puts("5. REGRESAR AL MENU PRINCIPAL");
+        puts("5. REGRESAR AL MENU DE BICOLAS");
 
         printf("\nOpcion: ");
         scanf("%d", &opcion);
@@ -166,7 +162,7 @@ void menuBicolaEntradaRestringida() {
             break;
         case 5:
             do {
-                printf("¿Esta seguro de regresar al menu principal (s/n)? ");
+                printf("¿Esta seguro de regresar al menu de bicolas (s/n)? ");
                 scanf(" %c", &confirmacion);
                 confirmacion = tolower(confirmacion);
                 if (confirmacion != 's' && confirmacion != 'n')
@@ -196,7 +192,7 @@ void menuBicolaSalidaRestringida() {
         puts("2. PUSH POR EL FINAL");
         puts("3. POP POR EL FINAL");
         puts("4. IMPRIME LOS ELEMENTOS DE LA BICOLA");
-        puts("5. REGRESAR AL MENU PRINCIPAL");
+        puts("5. REGRESAR AL MENU DE BICOLAS");
 
         printf("\nOpcion: ");
         scanf("%d", &opcion);
@@ -220,7 +216,7 @@ void menuBicolaSalidaRestringida() {
             break;
         case 5:
             do {
-                printf("¿Esta seguro de regresar al menu principal (s/n)? ");
+                printf("¿Esta seguro de regresar al menu de bicolas (s/n)? ");
                 scanf(" %c", &confirmacion);
                 confirmacion = tolower(confirmacion);
                 if (confirmacion != 's' && confirmacion != 'n')
@@ -238,7 +234,7 @@ void menuBicolaSalidaRestringida() {
 
 // MENU BICOLAS
 void menuBicolas() {
-    char opBicola;
+    char opBicola, confirmacion = 'n';
 
     do {
         puts("========================");
@@ -246,8 +242,9 @@ void menuBicolas() {
         puts("========================\n");
         puts("A) DE ENTRADA RESTRINGIDA");
         puts("B) DE SALIDA RESTRINGIDA");
+        puts("C) REGRESAR AL MENU DE COLAS\n");
 
-        printf("\n¿Con que bicola desea trabajar (A/B)? ");
+        printf("Opcion: ");
         scanf(" %c", &opBicola);
         opBicola = toupper(opBicola);
 
@@ -258,15 +255,18 @@ void menuBicolas() {
         case 'B':
             menuBicolaSalidaRestringida();
             break;
+        case 'C':
+            do {
+                printf("¿Está seguro de regresar al menu de colas (s/n)? ");
+                scanf(" %c", &confirmacion);
+                confirmacion = tolower(confirmacion);
+                if (confirmacion != 's' && confirmacion != 'n') {
+                    printf("Opción inválida, vuelva a ingresar.\n");
+                }
+            } while (confirmacion != 's' && confirmacion != 'n');
+            break;
         default:
             printf("Opcion invalida, vuelva a intentar.\n");
         }
-    } while (opBicola != 'A' && opBicola != 'B');
-}
-
-int main() {
-
-    menuBicolas();
-
-    return 0;
+    } while (opBicola != 'C' || confirmacion == 'n');
 }

@@ -2,16 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Estructura para cada nodo de la cola con prioridad
-typedef struct NodoCola {
-    int info;
-    int prioridad;
-    struct NodoCola *liga;
-} NodoCola;
+#include "colaprioridad.h"
 
 // Crea un nuevo nodo con liga nula 
-NodoCola *crearNodoCola(int info, int prioridad) {
-    NodoCola *nuevoNodo = (NodoCola *)malloc(sizeof(NodoCola));
+NodoColaPrio *crearNodoColaPrio(int info, int prioridad) {
+    NodoColaPrio *nuevoNodo = (NodoColaPrio *)malloc(sizeof(NodoColaPrio));
     nuevoNodo->info = info;
     nuevoNodo->prioridad = prioridad;
     nuevoNodo->liga = NULL;
@@ -19,20 +14,20 @@ NodoCola *crearNodoCola(int info, int prioridad) {
 }
 
 
-void push(NodoCola **inicio, int info, int prioridad) {
+void pushColPrio(NodoColaPrio **inicio, int info, int prioridad) {
     if(prioridad < 1 || prioridad > 5) {
         printf("Prioridad invalida, debe estar en [1,5]. No se agregara el elemento\n");
         return;
     }
 
-    NodoCola *nuevoNodo = crearNodoCola(info, prioridad);
+    NodoColaPrio *nuevoNodo = crearNodoColaPrio(info, prioridad);
     if (*inicio == NULL) {
         *inicio = nuevoNodo;
         return;
     }
 
-    NodoCola *actual = *inicio;
-    NodoCola *anterior = NULL;
+    NodoColaPrio *actual = *inicio;
+    NodoColaPrio *anterior = NULL;
     while (actual != NULL && actual->prioridad <= prioridad) {
         anterior = actual;
         actual = actual->liga;
@@ -49,12 +44,12 @@ void push(NodoCola **inicio, int info, int prioridad) {
 }
 
 
-void pop(NodoCola **inicio) {
+void popColPrio(NodoColaPrio **inicio) {
     if (*inicio == NULL) {
         printf("La cola está vacía.\n");
         return;
     }
-    NodoCola *temp = *inicio;
+    NodoColaPrio *temp = *inicio;
     *inicio = (*inicio)->liga;
     printf("Elemento %d con prioridad %d eliminado.\n", temp->info, temp->prioridad);
     free(temp);
@@ -62,13 +57,13 @@ void pop(NodoCola **inicio) {
 
 
 // IMPRIME LA COLA CON LA PRIORIDAD QUE TIENE CADA NODO
-void imprimirCola(NodoCola *inicio) {
+void imprimirColPrio(NodoColaPrio *inicio) {
     if (inicio == NULL) {
         printf("La cola está vacía.\n");
         return;
     }
     printf("Contenido de la cola con prioridad:\n");
-    NodoCola *actual = inicio;
+    NodoColaPrio *actual = inicio;
     while (actual != NULL) {
         printf("-> Elemento: %d, Prioridad: %d\n", actual->info, actual->prioridad);
         actual = actual->liga;
@@ -77,9 +72,9 @@ void imprimirCola(NodoCola *inicio) {
 
 
 // BORRA TODOS LOS NODOS DE LA COLA CON PRIORIDAD
-void borrarCola(NodoCola **inicio) {
+void borrarColPrio(NodoColaPrio **inicio) {
     while (*inicio != NULL) {
-        NodoCola *temp = *inicio;
+        NodoColaPrio *temp = *inicio;
         *inicio = (*inicio)->liga;
         free(temp);
     }
@@ -89,7 +84,7 @@ void borrarCola(NodoCola **inicio) {
 void menuColaPrioridad() {
     char confirmacion = 'n';
     int opcion, info, prioridad;
-    NodoCola *cola = NULL;
+    NodoColaPrio *cola = NULL;
 
     do {
         puts("==============================");
@@ -98,7 +93,7 @@ void menuColaPrioridad() {
         puts("1. PUSH (AGREGAR ELEMENTO)");
         puts("2. POP (ELIMINAR ELEMENTO)");
         puts("3. IMPRIMIR ELEMENTOS");
-        puts("4. REGRESAR AL MENU PRINCIPAL");
+        puts("4. REGRESAR AL MENU DE COLAS");
 
         printf("\nOpcion: ");
         scanf("%d", &opcion);
@@ -109,17 +104,17 @@ void menuColaPrioridad() {
             scanf("%d", &info);
             printf("Ingrese la prioridad del elemento: ");
             scanf("%d", &prioridad);
-            push(&cola, info, prioridad);
+            pushColPrio(&cola, info, prioridad);
             break;
         case 2:
-            pop(&cola);
+            popColPrio(&cola);
             break;
         case 3:
-            imprimirCola(cola);
+            imprimirColPrio(cola);
             break;
         case 4:
             do {
-                printf("¿Está seguro de salir (s/n)? ");
+                printf("¿Está seguro de regresar al menu de colas (s/n)? ");
                 scanf(" %c", &confirmacion);
                 confirmacion = tolower(confirmacion);
                 if (confirmacion != 's' && confirmacion != 'n') {
@@ -132,10 +127,5 @@ void menuColaPrioridad() {
         }
     } while (opcion != 4 || confirmacion == 'n');
 
-    borrarCola(&cola);
-}
-
-int main() {
-    menuColaPrioridad();
-    return 0;
+    borrarColPrio(&cola);
 }

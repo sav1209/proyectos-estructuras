@@ -3,11 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Estructura para cada nodo de la pila.
-typedef struct NodoPila {
-    int info;
-    struct NodoPila *liga;
-} NodoPila;
+#include "pila.h"
 
 // Crea un nuevo nodo con liga nula.
 NodoPila *crearNodoPila(int info) {
@@ -140,11 +136,4 @@ void menuPilas() {
         }
     } while (opcion != 4 || confirmacion == 'n');
     borrarPila(&pila);
-}
-
-int main() {
-
-    menuPilas();
-
-    return 0;
 }

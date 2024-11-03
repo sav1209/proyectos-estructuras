@@ -2,11 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Estructura para cada nodo de la cola.
-typedef struct NodoColaSim {
-    int info;
-    struct NodoColaSim *liga;
-} NodoColaSim;
+#include "colasimple.h"
 
 // Crea un nuevo nodo con liga nula.
 NodoColaSim *crearNodoColaSim(int info) {
@@ -17,7 +13,7 @@ NodoColaSim *crearNodoColaSim(int info) {
 }
 
 // 1. ALGORITMO QUE REALICE LA OPERACIÓN PUSH (INSERTAR POR EL FINAL)
-void push(NodoColaSim **frente, NodoColaSim **final, int info) {
+void pushColSim(NodoColaSim **frente, NodoColaSim **final, int info) {
     NodoColaSim *nuevoNodo = crearNodoColaSim(info);
 
     if (*final == NULL) {
@@ -32,7 +28,7 @@ void push(NodoColaSim **frente, NodoColaSim **final, int info) {
 }
 
 // 2. ALGORITMO QUE REALICE LA OPERACIÓN POP (ELIMINAR POR EL PRINCIPIO)
-void pop(NodoColaSim **frente, NodoColaSim **final) {
+void popColSim(NodoColaSim **frente, NodoColaSim **final) {
     if (*frente == NULL) {
         printf("La cola está vacía.\n");
         return;
@@ -51,7 +47,7 @@ void pop(NodoColaSim **frente, NodoColaSim **final) {
 }
 
 // 3. ALGORITMO QUE IMPRIMA LOS ELEMENTOS DE LA COLA
-void imprimirCola(NodoColaSim *frente) {
+void imprimirColSim(NodoColaSim *frente) {
     if (frente == NULL) {
         printf("La cola está vacía.\n");
     } else {
@@ -64,7 +60,7 @@ void imprimirCola(NodoColaSim *frente) {
 }
 
 // Borra todos los nodos de una cola.
-void borrarCola(NodoColaSim **frente, NodoColaSim **final) {
+void borrarColSim(NodoColaSim **frente, NodoColaSim **final) {
     NodoColaSim *temp;
     while (*frente != NULL) {
         temp = *frente;
@@ -82,13 +78,13 @@ void menuCola() {
     NodoColaSim *final = NULL;
 
     do {
-        puts("======================");
-        puts("===== MENU COLAS =====");
-        puts("======================\n");
+        puts("==============================");
+        puts("===== MENU COLAS SIMPLES =====");
+        puts("==============================\n");
         puts("1. PUSH (INSERTAR POR EL FINAL)");
         puts("2. POP (ELIMINAR POR EL PRINCIPIO)");
         puts("3. IMPRIME LOS ELEMENTOS DE LA COLA");
-        puts("4. REGRESAR AL MENU PRINCIPAL");
+        puts("4. REGRESAR AL MENU DE COLAS");
 
         printf("\nOpcion: ");
         scanf("%d", &opcion);
@@ -97,17 +93,17 @@ void menuCola() {
         case 1:
             printf("Ingrese el dato que desea agregar a la cola: ");
             scanf("%d", &info);
-            push(&frente, &final, info);
+            pushColSim(&frente, &final, info);
             break;
         case 2:
-            pop(&frente, &final);
+            popColSim(&frente, &final);
             break;
         case 3:
-            imprimirCola(frente);
+            imprimirColSim(frente);
             break;
         case 4:
             do {
-                printf("¿Está seguro de regresar al menú principal (s/n)? ");
+                printf("¿Está seguro de regresar al menu de colas (s/n)? ");
                 scanf(" %c", &confirmacion);
                 confirmacion = tolower(confirmacion);
                 if (confirmacion != 's' && confirmacion != 'n') {
@@ -119,11 +115,5 @@ void menuCola() {
             printf("Opción inválida, vuelva a intentar.\n");
         }
     } while (opcion != 4 || confirmacion == 'n');
-    borrarCola(&frente, &final);
+    borrarColSim(&frente, &final);
 }
-
-int main() {
-    menuCola();
-    return 0;
-}
-

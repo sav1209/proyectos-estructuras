@@ -7,6 +7,15 @@
 #include "listadoble.h"
 #include "listacircular.h"
 
+// PILAS
+#include "pila.h"
+
+// COLAS
+#include "colasimple.h"
+#include "bicola.h"
+#include "colaprioridad.h"
+
+
 void menuListas() {
     char confirmacion = 'n';
     int opcion;
@@ -53,6 +62,52 @@ void menuListas() {
     } while (opcion != 4 || confirmacion == 'n');
 }
 
+void menuColas() {
+    char confirmacion = 'n';
+    int opcion;
+
+    do {
+        system("cls");
+
+        puts("=========================");
+        puts("===== MENU DE COLAS =====");
+        puts("=========================\n");
+        puts("1. COLAS SIMPLES.");
+        puts("2. BICOLAS");
+        puts("3. COLAS CON PRIORIDAD");
+        puts("4. REGRESAR AL MENU PRINICIPAL.");
+
+        printf("\nOpcion: ");
+        scanf("%d", &opcion);
+        switch(opcion) {
+            case 1:
+                menuCola();
+                break;
+            case 2:
+                menuBicolas();
+                break;
+            case 3:
+                menuColaPrioridad();
+                break;
+            case 4:
+                do {
+                    printf("¿Esta seguro de regresar al menu principal (s/n)? ");
+                    scanf(" %c", &confirmacion);
+                    confirmacion = tolower(confirmacion);
+                    if (confirmacion != 's' && confirmacion != 'n') {
+                        printf("Opcion invalida, vuelva a ingresar.\n");
+                    }
+                } while (confirmacion != 's' && confirmacion != 'n');
+                break;
+            default:
+                printf("Opcion invalida, vuelva a intentar.\n");
+        }
+
+        putchar('\n');
+        system("pause");
+    } while (opcion != 4 || confirmacion == 'n');
+}
+
 int main() {
     char confirmacion = 'n';
     int opcion;
@@ -64,7 +119,7 @@ int main() {
         puts("===== PAQUETE DE ESTRUCTURAS DE DATOS =====");
         puts("===========================================\n");
         puts("1. LISTAS.");
-        puts("2. PILA");
+        puts("2. PILAS");
         puts("3. COLAS");
         puts("4. ARBOLES");
         puts("5. SALIR.");
@@ -74,6 +129,12 @@ int main() {
         switch(opcion) {
             case 1:
                 menuListas();
+                break;
+            case 2:
+                menuPilas();
+                break;
+            case 3:
+                menuColas();
                 break;
             case 5:
                 do {
