@@ -3,22 +3,22 @@
 #include <stdlib.h>
 
 // Estructura para cada nodo de la cola.
-typedef struct NodoCola {
+typedef struct NodoColaSim {
     int info;
-    struct NodoCola *liga;
-} NodoCola;
+    struct NodoColaSim *liga;
+} NodoColaSim;
 
 // Crea un nuevo nodo con liga nula.
-NodoCola *crearNodoCola(int info) {
-    NodoCola *nuevoNodo = (NodoCola *)malloc(sizeof(NodoCola));
+NodoColaSim *crearNodoColaSim(int info) {
+    NodoColaSim *nuevoNodo = (NodoColaSim *)malloc(sizeof(NodoColaSim));
     nuevoNodo->info = info;
     nuevoNodo->liga = NULL;
     return nuevoNodo;
 }
 
 // 1. ALGORITMO QUE REALICE LA OPERACIÓN PUSH (INSERTAR POR EL FINAL)
-void push(NodoCola **frente, NodoCola **final, int info) {
-    NodoCola *nuevoNodo = crearNodoCola(info);
+void push(NodoColaSim **frente, NodoColaSim **final, int info) {
+    NodoColaSim *nuevoNodo = crearNodoColaSim(info);
 
     if (*final == NULL) {
         // Si la cola está vacía, el nuevo nodo es el primero y el último.
@@ -28,16 +28,17 @@ void push(NodoCola **frente, NodoCola **final, int info) {
         (*final)->liga = nuevoNodo;
         *final = nuevoNodo;
     }
+    printf("Elemento insertado por el final de la cola.\n");
 }
 
 // 2. ALGORITMO QUE REALICE LA OPERACIÓN POP (ELIMINAR POR EL PRINCIPIO)
-void pop(NodoCola **frente, NodoCola **final) {
+void pop(NodoColaSim **frente, NodoColaSim **final) {
     if (*frente == NULL) {
         printf("La cola está vacía.\n");
         return;
     }
 
-    NodoCola *temp = *frente;
+    NodoColaSim *temp = *frente;
     *frente = (*frente)->liga;
 
     // Si eliminamos el último nodo, el puntero `final` también debe ser nulo.
@@ -50,11 +51,11 @@ void pop(NodoCola **frente, NodoCola **final) {
 }
 
 // 3. ALGORITMO QUE IMPRIMA LOS ELEMENTOS DE LA COLA
-void imprimirCola(NodoCola *frente) {
+void imprimirCola(NodoColaSim *frente) {
     if (frente == NULL) {
         printf("La cola está vacía.\n");
     } else {
-        NodoCola *temp = frente;
+        NodoColaSim *temp = frente;
         while (temp != NULL) {
             printf("-> %d\n", temp->info);
             temp = temp->liga;
@@ -63,8 +64,8 @@ void imprimirCola(NodoCola *frente) {
 }
 
 // Borra todos los nodos de una cola.
-void borrarCola(NodoCola **frente, NodoCola **final) {
-    NodoCola *temp;
+void borrarCola(NodoColaSim **frente, NodoColaSim **final) {
+    NodoColaSim *temp;
     while (*frente != NULL) {
         temp = *frente;
         *frente = (*frente)->liga;
@@ -77,18 +78,18 @@ void borrarCola(NodoCola **frente, NodoCola **final) {
 void menuCola() {
     char confirmacion = 'n';
     int opcion, info;
-    NodoCola *frente = NULL;
-    NodoCola *final = NULL;
-
-    puts("======================");
-    puts("===== MENU COLAS =====");
-    puts("======================\n");
-    puts("1. PUSH (INSERTAR POR EL FINAL)");
-    puts("2. POP (ELIMINAR POR EL PRINCIPIO)");
-    puts("3. IMPRIME LOS ELEMENTOS DE LA COLA");
-    puts("4. REGRESAR AL MENU PRINCIPAL");
+    NodoColaSim *frente = NULL;
+    NodoColaSim *final = NULL;
 
     do {
+        puts("======================");
+        puts("===== MENU COLAS =====");
+        puts("======================\n");
+        puts("1. PUSH (INSERTAR POR EL FINAL)");
+        puts("2. POP (ELIMINAR POR EL PRINCIPIO)");
+        puts("3. IMPRIME LOS ELEMENTOS DE LA COLA");
+        puts("4. REGRESAR AL MENU PRINCIPAL");
+
         printf("\nOpcion: ");
         scanf("%d", &opcion);
 
