@@ -2,11 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-typedef struct NodoLS {
-    int info;
-    struct NodoLS* liga;
-} NodoLS;
-
+#include "listasimple.h"
 
 // Crea un nuevo nodo con liga nula.
 NodoLS* crearNodoLS(int info) {
@@ -425,13 +421,4 @@ void menuListasSimples() {
         system("pause");
     } while (opcion != 14 || confirmacion == 'n');
     borrarLS(&listaSimple);
-}
-
-
-
-int main() {
-
-    menuListasSimples();
-
-    return 0;
 }

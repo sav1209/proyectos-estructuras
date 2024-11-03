@@ -1,15 +1,10 @@
 #ifndef LISTASIMPLE_H
 #define LISTASIMPLE_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
-
 typedef struct NodoLS {
     int info;
     struct NodoLS* liga;
 } NodoLS;
-
 
 // Crea un nuevo nodo con liga nula.
 NodoLS* crearNodoLS(int info);
