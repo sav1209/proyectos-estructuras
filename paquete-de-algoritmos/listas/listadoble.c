@@ -28,6 +28,8 @@ void borrarLD(ListaDoble** lista) {
         free(temp);
         temp = (*lista)->inicio;
     }
+    free(*lista);
+    *lista = NULL;
 }
 
 
@@ -76,35 +78,32 @@ ListaDoble* crearLDPorFinal() {
 // 2. IMPRIME EL CONTENIDO DE UNA LISTA DOBLEMENTE LIGADA
 void imprimirLDIzqADer(ListaDoble* lista) {
     NodoLD* inicio = lista->inicio;
-
     if (inicio == NULL) {
-        printf("La lista es vacia\n");
+        printf("\nLa lista es vacia\n");
         return;
     }
 
     NodoLD* temp = inicio;
-    printf("Lista de izquierda a derecha:\n");
+    printf("\nLista de izquierda a derecha:\n");
     while (temp != NULL) {
-        printf("%d  ", temp->dato);
+        printf("-> %d\n", temp->dato);
         temp = temp->siguiente;
     }
-    printf("\n");
 }
 
 void imprimirLDDerAIzq(ListaDoble* lista) {
     NodoLD* final = lista->final;
     if (final == NULL) {
-        printf("La lista es vacia\n");
+        printf("\nLa lista es vacia\n");
         return;
     }
 
     NodoLD* temp = final;
-    printf("Lista de derecha a izquierda:\n");
+    printf("\nLista de derecha a izquierda:\n");
     while (temp != NULL) {
-        printf("%d  ", temp->dato);
+        printf("-> %d\n", temp->dato);
         temp = temp->anterior;
     }
-    printf("\n");
 }
 
 void imprimirLD(ListaDoble* lista) {
@@ -124,7 +123,7 @@ void imprimirLD(ListaDoble* lista) {
                 imprimirLDDerAIzq(lista);
                 break;
             default:
-                puts("Opcion invalida, vuelva a intentar.");
+                puts("\nOpcion invalida, vuelva a intentar.");
                 break;
         }
     } while (opcion < 1 || opcion > 2);
@@ -148,6 +147,7 @@ void eliminarFinalLD(ListaDoble** lista) {
         final->siguiente = NULL;
         (*lista)->final = final;
     }
+    printf("Se ha eliminando el ultimo elemento.\n");
 }
 
 // 4. ELIMINA UN ELEMENTO CON INFORMACIÓN DADA POR EL USUARIO EN UNA LISTA DOBLEMENTE LIGADA
@@ -206,7 +206,7 @@ void eliminarNodoLD(ListaDoble** lista) {
         return;
     }
 
-    printf("¿Cual es el elemento antes del cual desea eliminar uno? ");
+    printf("¿Cual es el elemento del cual desea eliminar el anterior? ");
     scanf("%d", &x);
 
     NodoLD* temp = inicio;
@@ -250,6 +250,8 @@ void insertar_al_principio_LD(ListaDoble** lista){
     inicio->anterior = temp;
 
     (*lista)->inicio = temp;
+
+    printf("Se ha insertado correctamente el elemento al principio de la lista.\n");
 }
 
 // 3. INSERTA UN ELEMENTO DESPUÉS DE UNO CON INFORMACIÓN DADA POR EL USUARIO EN UNA LISTA DOBLEMENTE LIGADA
@@ -263,7 +265,7 @@ void insertar_despues_LD(ListaDoble** lista){
         printf("La lista esta vacia.\n");
         return;
     } else {   
-        printf("¿Cual es el elemento que deseas buscar? ");
+        printf("¿Cual es el elemento despues del cual desea insertar? ");
         scanf("%d", &x);
 
         NodoLD* temp = inicio;
@@ -291,6 +293,8 @@ void insertar_despues_LD(ListaDoble** lista){
             temp->siguiente->anterior = temp2;
             temp->siguiente = temp2;
         }
+
+        printf("El dato se ha insertado correctamente.\n");
     }
 }
 
@@ -312,22 +316,24 @@ int es_palindromo(ListaDoble* lista) {
 void menu_listas_dobles() {
     char confirmacion = 'n';
     int opcion;
-    ListaDoble* lista_doble = NULL;
-
-    puts("==========================================");
-    puts("===== MENU LISTAS DOBLEMENTE LIGADAS =====");
-    puts("==========================================\n");
-    puts("1. CREA UNA LISTA DOBLEMENTE LIGADA INSERTANDO A CADA ELEMENTO POR EL FINAL");
-    puts("2. IMPRIMIR EL CONTENIDO DE LA LISTA DOBLEMENTE LIGADA");
-    puts("3. ELIMINA EL ÚLTIMO ELEMENTO DE UNA LISTA DOBLEMENTE LIGADA");
-    puts("4. ELIMINA UN ELEMENTO CON INFORMACIÓN DADA EN UNA LISTA DOBLEMENTE LIGADA");
-    puts("5. ELIMINA UN ELEMENTO ANTES DE UNO CON INFORMACIÓN DADA");
-    puts("6. INSERTE UN ELEMENTO AL PRINCIPIO DE UNA LISTA DOBLEMENTE LIGADA");
-    puts("7. INSERTE UN ELEMENTO DESPUES DE UNO CON INFORMACION DADA POR EL USUARIO EN UNA LISTA DOBLEMENTE LIGADA");
-    puts("8. DETERMINAR SI UNA LISTA DOBLE ES O NO UN PALINDROMO");
-    puts("9. REGRESAR AL MENU PRINCIPAL");
+    ListaDoble* lista_doble = malloc(sizeof(ListaDoble));
+    lista_doble->inicio=NULL;
+    lista_doble->final=NULL;
 
     do {
+        puts("==========================================");
+        puts("===== MENU LISTAS DOBLEMENTE LIGADAS =====");
+        puts("==========================================\n");
+        puts("1. CREA UNA LISTA DOBLEMENTE LIGADA INSERTANDO A CADA ELEMENTO POR EL FINAL");
+        puts("2. IMPRIMIR EL CONTENIDO DE LA LISTA DOBLEMENTE LIGADA");
+        puts("3. ELIMINA EL ÚLTIMO ELEMENTO DE UNA LISTA DOBLEMENTE LIGADA");
+        puts("4. ELIMINA UN ELEMENTO CON INFORMACIÓN DADA EN UNA LISTA DOBLEMENTE LIGADA");
+        puts("5. ELIMINA UN ELEMENTO ANTES DE UNO CON INFORMACIÓN DADA");
+        puts("6. INSERTE UN ELEMENTO AL PRINCIPIO DE UNA LISTA DOBLEMENTE LIGADA");
+        puts("7. INSERTE UN ELEMENTO DESPUES DE UNO CON INFORMACION DADA POR EL USUARIO EN UNA LISTA DOBLEMENTE LIGADA");
+        puts("8. DETERMINAR SI UNA LISTA DOBLE ES O NO UN PALINDROMO");
+        puts("9. REGRESAR AL MENU PRINCIPAL");
+
         printf("\nOpcion: ");
         scanf("%d", &opcion);
 
