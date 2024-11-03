@@ -276,6 +276,7 @@ void menuListasCirculares() {
     NodoLC* listaCircular = NULL;
 
     do {
+        system("cls");
         puts("==================================");
         puts("===== MENU LISTAS CIRCULARES =====");
         puts("==================================\n");
@@ -341,6 +342,8 @@ void menuListasCirculares() {
             default:
                 printf("Opcion invalida, vuelva a intentar.\n");
         }
+        putchar('\n');
+        system("pause");
     } while (opcion != 9 || confirmacion == 'n');
     borraLC(&listaCircular);
 }
