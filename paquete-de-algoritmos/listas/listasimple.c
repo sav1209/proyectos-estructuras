@@ -143,7 +143,7 @@ int buscarElementoLS(NodoLS* primero, int valor) {
         printf("No se encontro el elemento.\n");
         return 0;
     } else {
-        printf("Se encontro el elmento.\n");
+        printf("Se encontro el elemento.\n");
         return 1;
     }
 }
@@ -323,25 +323,25 @@ void menuListasSimples() {
     int opcion, info, temp;
     NodoLS* listaSimple = NULL;
 
-    printf("===============================\n");
-    printf("===== MENU LISTAS SIMPLES =====\n");
-    printf("===============================\n\n");
-    printf(" 1. CREAR LISTA SIMPLE AGREGANDO CADA NUEVO NODO AL INICIO DE LA LISTA.\n");
-    printf(" 2. IMPRIMIR LISTA SIMPLE.\n");
-    printf(" 3. ELIMINAR EL ULTIMO ELEMENTO.\n");
-    printf(" 4. CREAR UNA LISTA SIMPLE AGREGANDO CADA NUEVO NODO AL FINAL DE LA LISTA.\n");
-    printf(" 5. BUSCAR UN ELEMENTO DENTRO DE UNA LISTA.\n");
-    printf(" 6. INSERTAR ELEMENTOS POR EL INICIO DE UNA LISTA EXISTENTE.\n");
-    printf(" 7. INSERTAR ELEMENTOS POR EL FINAL DE UNA LISTA EXISTENTE.\n");
-    printf(" 8. ELIMINAR EL PRIMER ELEMENTO DE UNA LISTA.\n");
-    printf(" 9. ELIMINAR UN NODO QUE COINCIDA CON CIERTA INFORMACION.\n");
-    printf("10. INSERTAR UN NODO ANTES DE UN NODO ESPECÍFICO.\n");
-    printf("11. INSERTAR UN NODO DESPUÉS DE UN NODO ESPECÍFICO.\n");
-    printf("12. ELIMINAR UN NODO ANTES DE UN NODO ESPECÍFICO.\n");
-    printf("13. ELIMINAR UN NODO DESPUÉS DE UN NODO ESPECÍFICO.\n");
-    printf("14. REGRESAR AL MENU PRINICIPAL.\n");
-
     do {
+        printf("===============================\n");
+        printf("===== MENU LISTAS SIMPLES =====\n");
+        printf("===============================\n\n");
+        printf(" 1. CREAR LISTA SIMPLE AGREGANDO CADA NUEVO NODO AL INICIO DE LA LISTA.\n");
+        printf(" 2. IMPRIMIR LISTA SIMPLE.\n");
+        printf(" 3. ELIMINAR EL ULTIMO ELEMENTO.\n");
+        printf(" 4. CREAR UNA LISTA SIMPLE AGREGANDO CADA NUEVO NODO AL FINAL DE LA LISTA.\n");
+        printf(" 5. BUSCAR UN ELEMENTO DENTRO DE UNA LISTA.\n");
+        printf(" 6. INSERTAR ELEMENTOS POR EL INICIO DE UNA LISTA EXISTENTE.\n");
+        printf(" 7. INSERTAR ELEMENTOS POR EL FINAL DE UNA LISTA EXISTENTE.\n");
+        printf(" 8. ELIMINAR EL PRIMER ELEMENTO DE UNA LISTA.\n");
+        printf(" 9. ELIMINAR UN NODO QUE COINCIDA CON CIERTA INFORMACION.\n");
+        printf("10. INSERTAR UN NODO ANTES DE UN NODO ESPECÍFICO.\n");
+        printf("11. INSERTAR UN NODO DESPUÉS DE UN NODO ESPECÍFICO.\n");
+        printf("12. ELIMINAR UN NODO ANTES DE UN NODO ESPECÍFICO.\n");
+        printf("13. ELIMINAR UN NODO DESPUÉS DE UN NODO ESPECÍFICO.\n");
+        printf("14. REGRESAR AL MENU PRINICIPAL.\n");
+
         printf("\nOpcion: ");
         scanf("%d", &opcion);
 
