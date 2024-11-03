@@ -4,6 +4,10 @@
 
 #include "listasimple.h"
 
+void menuListas() {
+
+}
+
 int main() {
     char confirmacion = 'n';
     int opcion;
@@ -14,15 +18,17 @@ int main() {
         puts("===========================================");
         puts("===== PAQUETE DE ESTRUCTURAS DE DATOS =====");
         puts("===========================================\n");
-        puts("1. LISTAS SIMPLES.");
-        puts("2. SALIR.");
+        puts("1. LISTAS.");
+        puts("2. PILA");
+        puts("3. COLAS");
+        puts("4. ARBOLES");
+        puts("5. SALIR.");
 
         printf("\nOpcion: ");
         scanf("%d", &opcion);
         switch(opcion) {
             case 1:
-                menuListasSimples();
-                break;
+
             case 2:
                 do {
                     printf("¿Esta seguro de regresar al menu principal (s/n)? ");
