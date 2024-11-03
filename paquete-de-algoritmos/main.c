@@ -1,4 +1,8 @@
-#include "listas/listasimple.h"
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+
+#include "listasimple.h"
 
 int main() {
     char confirmacion = 'n';
@@ -16,6 +20,9 @@ int main() {
         printf("\nOpcion: ");
         scanf("%d", &opcion);
         switch(opcion) {
+            case 1:
+                menuListasSimples();
+                break;
             case 2:
                 do {
                     printf("¿Esta seguro de regresar al menu principal (s/n)? ");
