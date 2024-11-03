@@ -337,7 +337,7 @@ void menuListasSimples() {
         printf("11. INSERTAR UN NODO DESPUÉS DE UN NODO ESPECÍFICO.\n");
         printf("12. ELIMINAR UN NODO ANTES DE UN NODO ESPECÍFICO.\n");
         printf("13. ELIMINAR UN NODO DESPUÉS DE UN NODO ESPECÍFICO.\n");
-        printf("14. REGRESAR AL MENU PRINICIPAL.\n");
+        printf("14. REGRESAR AL MENU DE LISTAS.\n");
 
         printf("\nOpcion: ");
         scanf("%d", &opcion);
@@ -406,7 +406,7 @@ void menuListasSimples() {
                 break;
             case 14:
                 do {
-                    printf("¿Esta seguro de regresar al menu principal (s/n)? ");
+                    printf("¿Esta seguro de regresar al menu de listas (s/n)? ");
                     scanf(" %c", &confirmacion);
                     confirmacion = tolower(confirmacion);
                     if (confirmacion != 's' && confirmacion != 'n') {
@@ -416,6 +416,7 @@ void menuListasSimples() {
                 break;
             default:
                 printf("Opcion invalida, vuelva a intentar.\n");
+                break;
         }
         putchar('\n');
         system("pause");

@@ -2,10 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-typedef struct NodoLC {
-    int info;
-    struct NodoLC* liga;
-} NodoLC;
+#include "listacircular.h"
 
 // Crea un nuevo nodo con liga nula.
 NodoLC* crearNodoLC(int info) {
@@ -288,7 +285,7 @@ void menuListasCirculares() {
         puts("6. INSERTA UN ELEMENTO AL PRINCIPIO EN UNA LISTA CIRCULAR ");
         puts("7. ELIMINA UN ELEMENTO AL FINAL DE UNA LISTA CIRCULAR");
         puts("8. ELIMINA UN ELEMENTO DESPUÉS DE UNO CON INFORMACIÓN DADA POR EL USUARIO EN UNA LISTA CIRCULAR");
-        puts("9. REGRESAR AL MENU PRINCIPAL");
+        puts("9. REGRESAR AL MENU DE LISTAS");
 
         printf("\nOpcion: ");
         scanf("%d", &opcion);
@@ -331,7 +328,7 @@ void menuListasCirculares() {
                 break;
             case 9:
                 do {
-                    printf("¿Esta seguro de regresar al menu principal (s/n)? ");
+                    printf("¿Esta seguro de regresar al menu de listas (s/n)? ");
                     scanf(" %c", &confirmacion);
                     confirmacion = tolower(confirmacion);
                     if (confirmacion != 's' && confirmacion != 'n') {
@@ -341,18 +338,10 @@ void menuListasCirculares() {
                 break;
             default:
                 printf("Opcion invalida, vuelva a intentar.\n");
+                break;
         }
         putchar('\n');
         system("pause");
     } while (opcion != 9 || confirmacion == 'n');
     borraLC(&listaCircular);
-}
-
-
-
-int main() {
-
-    menuListasCirculares();
-
-    return 0;
 }

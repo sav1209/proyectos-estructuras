@@ -2,19 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-// Definición de un nodo de la lista doblemente ligada
-typedef struct NodoLD {
-    int dato;
-    struct NodoLD* siguiente;
-    struct NodoLD* anterior;
-} NodoLD;
-
-// Definición de la estructura de la lista doblemente ligada
-typedef struct {
-    NodoLD* inicio;
-    NodoLD* final;
-} ListaDoble;
-
+#include "listadoble.h"
 
 // Borra todos los nodos de una lista simple.
 void borrarLD(ListaDoble** lista) {
@@ -333,7 +321,7 @@ void menu_listas_dobles() {
         puts("6. INSERTE UN ELEMENTO AL PRINCIPIO DE UNA LISTA DOBLEMENTE LIGADA");
         puts("7. INSERTE UN ELEMENTO DESPUES DE UNO CON INFORMACION DADA POR EL USUARIO EN UNA LISTA DOBLEMENTE LIGADA");
         puts("8. DETERMINAR SI UNA LISTA DOBLE ES O NO UN PALINDROMO");
-        puts("9. REGRESAR AL MENU PRINCIPAL");
+        puts("9. REGRESAR AL MENU DE LISTAS");
 
         printf("\nOpcion: ");
         scanf("%d", &opcion);
@@ -370,7 +358,7 @@ void menu_listas_dobles() {
                 break;
             case 9:
                 do {
-                    printf("¿Esta seguro de regresar al menu principal (s/n)? ");
+                    printf("¿Esta seguro de regresar al menu de listas (s/n)? ");
                     scanf(" %c", &confirmacion);
                     confirmacion = tolower(confirmacion);
                     if (confirmacion != 's' && confirmacion != 'n') {
@@ -386,13 +374,4 @@ void menu_listas_dobles() {
         system("pause");
     } while (opcion != 9 || confirmacion == 'n');
     borrarLD(&lista_doble);
-}
-
-
-
-int main() {
-
-    menu_listas_dobles();
-
-    return 0;
 }
