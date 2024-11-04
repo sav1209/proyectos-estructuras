@@ -137,7 +137,7 @@ void menuABB() {
         puts("==========================================");
         puts("===== MENU ÁRBOL BINARIO DE BÚSQUEDA =====");
         puts("==========================================\n");
-        puts("1. INSERTAR UN ELEMENTO EN EL ABB.");
+        puts("1. INSERTAR UN ELEMENTO EN EL ABB");
         puts("2. BUSCA UN ELEMENTO EN EL ABB");
         puts("3. ELIMINA UN ELEMENTO DEL ABB");
         puts("4. IMPRESION (EN INORDEN)");

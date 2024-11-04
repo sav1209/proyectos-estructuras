@@ -29,10 +29,10 @@ void menuListas() {
         puts("==========================");
         puts("===== MENU DE LISTAS =====");
         puts("==========================\n");
-        puts("1. LISTAS SIMPLES.");
+        puts("1. LISTAS SIMPLES");
         puts("2. LISTAS DOBLEMENTE LIGADAS");
         puts("3. LISTAS CIRCULARES");
-        puts("4. REGRESAR AL MENU PRINICIPAL.");
+        puts("4. REGRESAR AL MENU PRINICIPAL");
 
         printf("\nOpcion: ");
         scanf("%d", &opcion);
@@ -74,10 +74,10 @@ void menuColas() {
         puts("=========================");
         puts("===== MENU DE COLAS =====");
         puts("=========================\n");
-        puts("1. COLAS SIMPLES.");
+        puts("1. COLAS SIMPLES");
         puts("2. BICOLAS");
         puts("3. COLAS CON PRIORIDAD");
-        puts("4. REGRESAR AL MENU PRINCIPAL.");
+        puts("4. REGRESAR AL MENU PRINCIPAL");
 
         printf("\nOpcion: ");
         scanf("%d", &opcion);
@@ -119,9 +119,9 @@ void menuArboles() {
         puts("===========================");
         puts("===== MENU DE ARBOLES =====");
         puts("===========================\n");
-        puts("1. ARBOLES BINARIOS.");
+        puts("1. ARBOLES BINARIOS");
         puts("2. ARBOLES BINARIOS DE BUSQUEDA");
-        puts("3. REGRESAR AL MENU PRINICIPAL.");
+        puts("3. REGRESAR AL MENU PRINICIPAL");
 
         printf("\nOpcion: ");
         scanf("%d", &opcion);
@@ -160,11 +160,11 @@ int main() {
         puts("===========================================");
         puts("===== PAQUETE DE ESTRUCTURAS DE DATOS =====");
         puts("===========================================\n");
-        puts("1. LISTAS.");
+        puts("1. LISTAS");
         puts("2. PILAS");
         puts("3. COLAS");
         puts("4. ARBOLES");
-        puts("5. SALIR.");
+        puts("5. SALIR");
 
         printf("\nOpcion: ");
         scanf("%d", &opcion);
