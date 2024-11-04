@@ -129,12 +129,13 @@ void menuPilas() {
                 confirmacion = tolower(confirmacion);
                 if (confirmacion != 's' && confirmacion != 'n')
                 {
-                    printf("Opcion invalida, vuelva a ingresar.\n");
+                    printf("Opcion invalida, vuelva a ingresar.\n\n");
                 }
             } while (confirmacion != 's' && confirmacion != 'n');
             break;
         default:
-            printf("Opcion invalida, vuelva a intentar.\n");
+            printf("Opcion invalida, vuelva a intentar.\n\n");
+            break;
         }
 
         putchar('\n');

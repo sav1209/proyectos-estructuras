@@ -363,12 +363,12 @@ void menu_listas_dobles() {
                     scanf(" %c", &confirmacion);
                     confirmacion = tolower(confirmacion);
                     if (confirmacion != 's' && confirmacion != 'n') {
-                        printf("Opcion invalida, vuelva a ingresar.\n");
+                        printf("Opcion invalida, vuelva a ingresar.\n\n");
                     }
                 } while (confirmacion != 's' && confirmacion != 'n');
                 break;
             default:
-                puts("Opcion invalida.");
+                printf("Opcion invalida, vuelva a intentar.\n");
                 break;
         }
 

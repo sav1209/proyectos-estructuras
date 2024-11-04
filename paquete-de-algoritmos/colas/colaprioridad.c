@@ -120,7 +120,7 @@ void menuColaPrioridad() {
                     scanf(" %c", &confirmacion);
                     confirmacion = tolower(confirmacion);
                     if (confirmacion != 's' && confirmacion != 'n') {
-                        printf("Opción inválida, vuelva a ingresar.\n");
+                        printf("Opción inválida, vuelva a ingresar.\n\n");
                     }
                 } while (confirmacion != 's' && confirmacion != 'n');
                 break;

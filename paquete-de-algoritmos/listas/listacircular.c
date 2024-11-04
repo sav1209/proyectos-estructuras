@@ -333,7 +333,7 @@ void menuListasCirculares() {
                     scanf(" %c", &confirmacion);
                     confirmacion = tolower(confirmacion);
                     if (confirmacion != 's' && confirmacion != 'n') {
-                        printf("Opcion invalida, vuelva a ingresar.\n");
+                        printf("Opcion invalida, vuelva a ingresar.\n\n");
                     }
                 } while (confirmacion != 's' && confirmacion != 'n');
                 break;

@@ -3,21 +3,21 @@
 #include <stdlib.h>
 
 // LISTAS
-#include "listasimple.h"
-#include "listadoble.h"
-#include "listacircular.h"
+#include "listas/listasimple.h"
+#include "listas/listadoble.h"
+#include "listas/listacircular.h"
 
 // PILAS
-#include "pila.h"
+#include "pilas/pila.h"
 
 // COLAS
-#include "colasimple.h"
-#include "bicola.h"
-#include "colaprioridad.h"
+#include "colas/colasimple.h"
+#include "colas/bicola.h"
+#include "colas/colaprioridad.h"
 
 // ARBOLES
-#include "arbolbinario.h"
-#include "arbolbinariobusqueda.h"
+#include "arboles/arbolbinario.h"
+#include "arboles/arbolbinariobusqueda.h"
 
 void menuListas() {
     char confirmacion = 'n';
@@ -52,16 +52,15 @@ void menuListas() {
                     scanf(" %c", &confirmacion);
                     confirmacion = tolower(confirmacion);
                     if (confirmacion != 's' && confirmacion != 'n') {
-                        printf("Opcion invalida, vuelva a ingresar.\n");
+                        printf("Opcion invalida, vuelva a ingresar.\n\n");
                     }
                 } while (confirmacion != 's' && confirmacion != 'n');
                 break;
             default:
-                printf("Opcion invalida, vuelva a intentar.\n");
+                printf("Opcion invalida, vuelva a intentar.\n\n");
+                system("pause");
+                break;
         }
-
-        putchar('\n');
-        system("pause");
     } while (opcion != 4 || confirmacion == 'n');
 }
 
@@ -78,7 +77,7 @@ void menuColas() {
         puts("1. COLAS SIMPLES.");
         puts("2. BICOLAS");
         puts("3. COLAS CON PRIORIDAD");
-        puts("4. REGRESAR AL MENU PRINICIPAL.");
+        puts("4. REGRESAR AL MENU PRINCIPAL.");
 
         printf("\nOpcion: ");
         scanf("%d", &opcion);
@@ -98,16 +97,15 @@ void menuColas() {
                     scanf(" %c", &confirmacion);
                     confirmacion = tolower(confirmacion);
                     if (confirmacion != 's' && confirmacion != 'n') {
-                        printf("Opcion invalida, vuelva a ingresar.\n");
+                        printf("Opcion invalida, vuelva a ingresar.\n\n");
                     }
                 } while (confirmacion != 's' && confirmacion != 'n');
                 break;
             default:
-                printf("Opcion invalida, vuelva a intentar.\n");
+                printf("Opcion invalida, vuelva a intentar.\n\n");
+                system("pause");
+                break;
         }
-
-        putchar('\n');
-        system("pause");
     } while (opcion != 4 || confirmacion == 'n');
 }
 
@@ -140,16 +138,15 @@ void menuArboles() {
                     scanf(" %c", &confirmacion);
                     confirmacion = tolower(confirmacion);
                     if (confirmacion != 's' && confirmacion != 'n') {
-                        printf("Opcion invalida, vuelva a ingresar.\n");
+                        printf("Opcion invalida, vuelva a ingresar.\n\n");
                     }
                 } while (confirmacion != 's' && confirmacion != 'n');
                 break;
             default:
-                printf("Opcion invalida, vuelva a intentar.\n");
+                printf("Opcion invalida, vuelva a intentar.\n\n");
+                system("pause");
+                break;
         }
-
-        putchar('\n');
-        system("pause");
     } while (opcion != 3 || confirmacion == 'n');
 }
 
@@ -186,20 +183,19 @@ int main() {
                 break;
             case 5:
                 do {
-                    printf("¿Esta seguro de regresar al menu principal (s/n)? ");
+                    printf("¿Esta seguro de regresar salir del programa (s/n)? ");
                     scanf(" %c", &confirmacion);
                     confirmacion = tolower(confirmacion);
                     if (confirmacion != 's' && confirmacion != 'n') {
-                        printf("Opcion invalida, vuelva a ingresar.\n");
+                        printf("Opcion invalida, vuelva a ingresar.\n\n");
                     }
                 } while (confirmacion != 's' && confirmacion != 'n');
                 break;
             default:
-                printf("Opcion invalida, vuelva a intentar.\n");
+                printf("Opcion invalida, vuelva a intentar.\n\n");
+                system("pause");
+                break;
         }
-
-        putchar('\n');
-        system("pause");
     } while (opcion != 5 || confirmacion == 'n');
 
     return 0;
