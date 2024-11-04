@@ -15,6 +15,9 @@
 #include "bicola.h"
 #include "colaprioridad.h"
 
+// ARBOLES
+#include "arbolbinario.h"
+#include "arbolbinariobusqueda.h"
 
 void menuListas() {
     char confirmacion = 'n';
@@ -108,6 +111,48 @@ void menuColas() {
     } while (opcion != 4 || confirmacion == 'n');
 }
 
+void menuArboles() {
+    char confirmacion = 'n';
+    int opcion;
+
+    do {
+        system("cls");
+
+        puts("===========================");
+        puts("===== MENU DE ARBOLES =====");
+        puts("===========================\n");
+        puts("1. ARBOLES BINARIOS.");
+        puts("2. ARBOLES BINARIOS DE BUSQUEDA");
+        puts("3. REGRESAR AL MENU PRINICIPAL.");
+
+        printf("\nOpcion: ");
+        scanf("%d", &opcion);
+        switch(opcion) {
+            case 1:
+                menuArbolBinario();
+                break;
+            case 2:
+                menuABB();
+                break;
+            case 3:
+                do {
+                    printf("¿Esta seguro de regresar al menu principal (s/n)? ");
+                    scanf(" %c", &confirmacion);
+                    confirmacion = tolower(confirmacion);
+                    if (confirmacion != 's' && confirmacion != 'n') {
+                        printf("Opcion invalida, vuelva a ingresar.\n");
+                    }
+                } while (confirmacion != 's' && confirmacion != 'n');
+                break;
+            default:
+                printf("Opcion invalida, vuelva a intentar.\n");
+        }
+
+        putchar('\n');
+        system("pause");
+    } while (opcion != 3 || confirmacion == 'n');
+}
+
 int main() {
     char confirmacion = 'n';
     int opcion;
@@ -135,6 +180,9 @@ int main() {
                 break;
             case 3:
                 menuColas();
+                break;
+            case 4:
+                menuArboles();
                 break;
             case 5:
                 do {

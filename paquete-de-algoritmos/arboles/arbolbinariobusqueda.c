@@ -4,11 +4,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-typedef struct NodoABB {
-    int info;
-    struct NodoABB* ligaIzq;
-    struct NodoABB* ligaDer;
-} NodoABB;
+#include "arbolbinariobusqueda.h"
 
 // Crea un nuevo nodo con ligas nulas.
 NodoABB* crearNodoABB(int info) {
@@ -136,6 +132,8 @@ void menuABB() {
     NodoABB* raiz = NULL;
     
     do {
+        system("cls");
+
         puts("==========================================");
         puts("===== MENU ÁRBOL BINARIO DE BÚSQUEDA =====");
         puts("==========================================\n");
@@ -143,7 +141,7 @@ void menuABB() {
         puts("2. BUSCA UN ELEMENTO EN EL ABB");
         puts("3. ELIMINA UN ELEMENTO DEL ABB");
         puts("4. IMPRESION (EN INORDEN)");
-        puts("5. REGRESAR AL MENU PRINCIPAL");
+        puts("5. REGRESAR AL MENU DE ARBOLES");
 
         printf("\nOpcion: ");
         scanf("%d", &opcion);
@@ -184,7 +182,7 @@ void menuABB() {
                 break;
             case 5:
                 do {
-                    printf("¿Está seguro de regresar al menú principal (s/n)? ");
+                    printf("¿Está seguro de regresar al menu de arboles (s/n)? ");
                     scanf(" %c", &confirmacion);
                     confirmacion = tolower(confirmacion);
                     if (confirmacion != 's' && confirmacion != 'n') {
@@ -196,11 +194,9 @@ void menuABB() {
             default:
                 printf("Opcion invalida, vuelva a intentar.\n");
         }
+        
+        putchar('\n');
+        system("pause");
     } while (opcion != 5 || confirmacion == 'n');
     BorrarABB(&raiz);
-}
-
-int main() {
-    menuABB();
-    return 0;
 }

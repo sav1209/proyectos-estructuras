@@ -2,11 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-typedef struct NodoArbol {
-    int info;
-    struct NodoArbol* ligaIzq;
-    struct NodoArbol* ligaDer;
-} NodoArbol;
+#include "arbolbinario.h"
 
 // Crea un nuevo nodo con ligas nulas.
 NodoArbol* crearNodoArbol(int info) {
@@ -96,6 +92,8 @@ void menuArbolBinario() {
     NodoArbol* raiz = NULL;
 
     do {
+        system("cls");
+
         puts("==========================");
         puts("=== MENU ARBOL BINARIO ===");
         puts("==========================\n");
@@ -103,7 +101,7 @@ void menuArbolBinario() {
         puts("2. IMPRESION EN PREORDEN");
         puts("3. IMPRESION EN INORDEN");
         puts("4. IMPRESION EN POSORDEN");
-        puts("5. REGRESAR AL MENU PRINCIPAL");
+        puts("5. REGRESAR AL MENU DE ARBOLES");
 
         printf("\nOpcion: ");
         scanf("%d", &opcion);
@@ -138,7 +136,7 @@ void menuArbolBinario() {
                 break;
             case 5:
                 do {
-                    printf("¿Está seguro de regresar al menú principal (s/n)? ");
+                    printf("¿Está seguro de regresar al menu de arboles (s/n)? ");
                     scanf(" %c", &confirmacion);
                     confirmacion = tolower(confirmacion);
                     if (confirmacion != 's' && confirmacion != 'n') {
@@ -150,11 +148,9 @@ void menuArbolBinario() {
             default:
                 printf("Opcion invalida, vuelva a intentar.\n");
         }
+
+        putchar('\n');
+        system("pause");
     } while (opcion != 5 || confirmacion == 'n');
     BorrarArbol(&raiz);
-}
-
-int main() {
-    menuArbolBinario();
-    return 0;
 }
